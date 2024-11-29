@@ -1,0 +1,102 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/resumen.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" 
+          integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" 
+            integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js" 
+            integrity="sha512-/IJVg2oav2TggiFftaMSPgttHNmgu/0RSGP64Nm7wqYwjkxj4hAHLRMJi3QNTa22f4pIkvTsCpB848HEilV6MA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+<div class="resumen-trabajo-container">
+    <h1>Resumen del Trabajo</h1>
+
+    <!-- Sección de detalles del trabajo en el ancho completo -->
+    <div class="trabajo-detalles">
+        <h2>Detalles del Trabajo</h2>
+        <p><strong>Título:</strong> {{ trabajo.titulo }}</p>
+        <p><strong>Descripción:</strong> {{ trabajo.descripcion }}</p>
+        <p><strong>Presupuesto:</strong> {{ trabajo.presupuesto_minimo }} - {{ trabajo.presupuesto_maximo }}</p>
+        <p><strong>Ubicación:</strong> {{ trabajo.region }} - {{ trabajo.comuna }}</p>
+        <p><strong>Habilidades requeridas:</strong> 
+            {% for habilidad in trabajo.habilidades.all %}
+                {{ habilidad }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        {% if trabajo.is_completado %}
+        <p><strong>Forma de pago:</strong> {{ trabajo.forma_pago|default:"No seleccionada aún" }}</p>
+        <p><strong>Pago final:</strong> ${{ trabajo.pago_final }} CLP </p>
+        {% else %}
+        {% endif %}
+        <p><strong>Publicado el:</strong> {{ trabajo.fecha_creacion }}</p>
+    </div>
+
+    <!-- Sección de detalles del empleador y trabajador en dos columnas -->
+    <div class="detalles-container">
+        <!-- Columna Empleador -->
+        <div class="columna">
+            <h2>Empleador</h2>
+            {% if empleador.foto_perfil %}
+              <a href="{{ empleador.foto_perfil.url }}" data-lightbox="perfil-empleador" data-title="Foto de {{ empleador.get_full_name }}">
+                <img src="{{ empleador.foto_perfil.url }}" alt="Foto de perfil de {{ empleador.get_full_name }}" class="profile-image">
+              </a>
+            {% else %}
+              <a href="{% static 'images/foto_perfil_defecto.svg' %}" data-lightbox="perfil" data-title="Foto de perfil por defecto">
+                <img src="{% static 'images/foto_perfil_defecto.svg' %}" alt="Foto de perfil por defecto" class="profile-image">
+              </a>
+            {% endif %}
+            <p><strong>Nombre:</strong> {{ empleador.get_full_name }}</p>
+            <p><strong>Edad:</strong> {{ empleador_edad }}</p>
+            <p><strong>Email:</strong> {{ empleador.email }}</p>
+            <p><strong>Teléfono:</strong> {{ empleador.numero_telefono }}</p>
+            <p><strong>Calificación:</strong> {{ empleador_calificacion }} ★</p>
+        </div>
+
+        <!-- Columna Trabajador -->
+        <div class="columna">
+            <h2>Trabajador</h2>
+            {% if trabajador.foto_perfil %}
+              <a href="{{ trabajador.foto_perfil.url }}" data-lightbox="perfil-trabajador" data-title="Foto de {{ trabajador.get_full_name }}">
+                <img src="{{ trabajador.foto_perfil.url }}" alt="Foto de perfil de {{ trabajador.get_full_name }}" class="profile-image">
+              </a>
+            {% else %}
+              <a href="{% static 'images/foto_perfil_defecto.svg' %}" data-lightbox="perfil" data-title="Foto de perfil por defecto">
+                <img src="{% static 'images/foto_perfil_defecto.svg' %}" alt="Foto de perfil por defecto" class="profile-image">
+              </a>
+            {% endif %}
+            <p><strong>Nombre:</strong> {{ trabajador.get_full_name }}</p>
+            <p><strong>Edad:</strong> {{ trabajador_edad }}</p>
+            <p><strong>Email:</strong> {{ trabajador.email }}</p>
+            <p><strong>Teléfono:</strong> {{ trabajador.numero_telefono }}</p>
+            <p><strong>Calificación:</strong> {{ trabajador_calificacion }} ★</p>
+        </div>
+    </div>
+
+    {% if empleador %}
+        {% if trabajo.is_completado %}
+            <p><strong>Estado:</strong> Trabajo completado</p>
+        {% else %}
+            <a href="{% url 'seleccionar_forma_pago' trabajo.id %}" class="btn btn-primary">Trabajo realizado</a>
+        {% endif %}
+    {% else %}
+        {% if trabajo.is_completado %}
+            <p><strong>Estado:</strong> Trabajo completado</p>
+        {% else %}
+            <p><strong>Estado:</strong> Trabajo en proceso</p>
+        {% endif %}
+    {% endif %}
+
+    <a href="{% url 'ver_trabajos' %}" class="btn btn-secondary">Volver a la lista de trabajos</a>
+</div>
+{% endblock %}

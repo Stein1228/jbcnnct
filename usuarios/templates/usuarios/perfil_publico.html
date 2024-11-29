@@ -1,0 +1,299 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Perfil de {{ usuario.first_name }} {{ usuario.last_name }}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" 
+          integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{% static 'usuarios/css/perfil_publico.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" 
+            integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js" 
+            integrity="sha512-/IJVg2oav2TggiFftaMSPgttHNmgu/0RSGP64Nm7wqYwjkxj4hAHLRMJi3QNTa22f4pIkvTsCpB848HEilV6MA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    {% if request.user.is_staff %}
+    <div class="profile-container">
+        <!-- Contenedor de los botones -->
+        <div class="profile-buttons">
+            <!-- Botón Editar -->
+            <a href="{% url 'editar_perfil_admin' usuario.id %}" class="btn btn-action-edit">Editar Perfil</a>
+
+            <!-- Formulario para Eliminar -->
+            <form method="POST" action="{% url 'eliminar_perfil' usuario.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-action-delete">Eliminar Perfil</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="profile-header">
+        <div class="profile-image">
+            {% if usuario.foto_perfil %}
+                <a href="{{ usuario.foto_perfil.url }}" data-lightbox="perfil" data-title="Foto de {{ usuario.first_name }}">
+                    <img src="{{ usuario.foto_perfil.url }}" alt="Foto de {{ usuario.first_name }}" class="profile-image">
+                </a>
+            {% else %}
+                <a href="{% static 'images/foto_perfil_defecto.svg' %}" data-lightbox="perfil" data-title="Foto de perfil por defecto">
+                    <img src="{% static 'images/foto_perfil_defecto.svg' %}" alt="Foto de perfil por defecto" class="profile-image">
+                </a>
+            {% endif %}
+        </div>
+        
+        <div class="profile-name">
+            <h1>{{ usuario.first_name }} {{ usuario.last_name }}</h1>
+            <h2>{{ usuario.calificacion_promedio|floatformat:1 }} ★</h2>
+            <ul class="profile-info-list">
+                <li><p>{{ edad }} años</p></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="profile-section">
+        <p class="profile-label">Biografía</p>
+        <div class="profile-content">
+            <p class="bio">{{ usuario.bio }}</p>
+        </div>
+    </div>
+
+    <div class="profile-grid">
+        <div class="profile-section">
+            <h2>Datos Personales</h2>
+            
+            <div class="profile-item">
+                <p class="profile-label">Nombre completo</p>
+                <div class="profile-content">
+                    {{ usuario.first_name }}
+                    {% if usuario.s_nombre %}
+                        {{ usuario.s_nombre }} 
+                    {% endif %}
+                    {{ usuario.last_name }}
+                    {% if usuario.s_apellido %}
+                        {{ usuario.s_apellido }}
+                    {% endif %}
+                </div>
+            </div>
+    
+            {% if usuario.region and usuario.comuna %}
+            <div class="profile-item">
+                <p class="profile-label">Comuna</p>
+                <div class="profile-content">
+                    {{usuario.comuna}}, {{usuario.region}}
+                </div>
+            </div>
+            {% else %}
+            
+            {% endif %}
+
+            <div class="profile-item">
+                <p class="profile-label">Fecha de Nacimiento</p>
+                <div class="profile-content">{{ usuario.fecha_nacimiento }}</div>
+            </div>
+
+            <div class="profile-item horizontal-items">
+                <div class="gender-nationality">
+                    <div class="profile-item">
+                        <p class="profile-label">Género</p>
+                        <div class="profile-content">
+                            {% if usuario.genero == 'M' %}Masculino
+                            {% elif usuario.genero == 'F' %}Femenino
+                            {% elif usuario.genero == 'O' %}Otro
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="profile-item">
+                        <p class="profile-label">Nacionalidad</p>
+                        <div class="profile-content"> 
+                            {% if usuario.nacionalidad == 'CL' %}Chilena
+                            {% elif usuario.nacionalidad == 'AR' %}Argentina
+                            {% elif usuario.nacionalidad == 'BR' %}Brasileña
+                            {% elif usuario.nacionalidad == 'VE' %}Venezolana
+                            {% elif usuario.nacionalidad == 'PE' %}Peruana
+                            {% elif usuario.nacionalidad == 'CO' %}Colombiana
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Conocimientos</h2>
+            <div class="profile-add">
+                <ul>
+                    {% for habilidad in usuario.habilidades.all %}
+                        <li><p>{{ habilidad.nombre }}</p></li>
+                    {% empty %}
+
+                    {% endfor %}
+                </ul>
+            </div>                    
+        </div>
+
+        <div class="profile-section">
+            <h2>Contacto</h2>
+            <div class="profile-item">
+                <p class="profile-label">Teléfono</p>
+                <div class="profile-content">{{ usuario.numero_telefono }}</div>
+            </div>
+            <div class="profile-item">
+                <p class="profile-label">Correo Electrónico</p>
+                <div class="profile-content">{{ usuario.email }}</div>
+            </div>
+
+            {% if usuario.instagram or usuario.facebook %}
+                <h2>Redes sociales</h2>
+                <div class="profile-item">
+                    {% if usuario.instagram %}
+                        <a href="{{ usuario.instagram }}" target="_blank">
+                            <img src="{% static 'usuarios/images/icons8-instagram-500.png' %}" alt="Instagram">
+                        </a>
+                    {% endif %}
+                    {% if usuario.facebook %}
+                        <a href="{{ usuario.facebook }}" target="_blank">
+                            <img src="{% static 'usuarios/images/icons8-facebook-500.png' %}" alt="Facebook">
+                        </a>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <h2>Actividad</h2>
+            <div class="profile-item horizontal-items">
+                <div class="gender-nationality">
+                    <div class="profile-item">
+                        <p class="profile-label">Trabajos realizados</p>
+                        <p>{{ usuario.trabajos_realizados }}</p>
+                    </div>
+                    <div class="profile-item">
+                        <p class="profile-label">Trabajos solicitados</p>
+                        <p>{{ usuario.trabajos_solicitados }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if reseñas %}
+        <div class="container-resenas">
+            <h2>Reseñas</h2>
+            <ul>
+                {% for reseña in reseñas %}
+                    <li>
+                        <div class="review-card">
+                            <div class="review-header">
+                                <span class="review-username">Reseña de: {{ reseña.usuario_revisor.get_full_name }}</span>
+                                <span class="review-date">{{ reseña.fecha_creacion|date:"d/m/Y" }}</span>
+                                <span class="review-rating">{{ reseña.calificacion }} ★</span>
+                            </div>
+                            <div class="review-content">
+                                <p>{{ reseña.contenido }}</p>
+                            </div>
+                            {% if reseña.imagenes.all %}
+                                <div class="imagenes-reseña">
+                                    {% for imagen in reseña.imagenes.all %}
+                                        <a href="{{ imagen.imagen.url }}" data-lightbox="reseña-{{ reseña.id }}" data-title="Imagen de la reseña">
+                                            <img src="{{ imagen.imagen.url }}" alt="Imagen de la reseña" class="imagen-reseña">
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+
+                            {% if request.user == reseña.usuario_revisor or request.user.is_staff %}
+                                <div class="boton_reseña">
+                                    <a href="{% url 'modificar_reseña' reseña.id %}" class="btn-modificar">Modificar</a>
+                                    
+                                    <form action="{% url 'eliminar_reseña' reseña.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="button" class="btn-eliminar">Eliminar</button>
+                                    </form>
+                                
+                                </div>
+                            {% endif %}
+                            <div id="modal-eliminar" class="modal">
+                                <div class="modal-contenido">
+                                    <h3>¿Estás seguro de que deseas eliminar esta reseña?</h3>
+                                    <form id="form-eliminar" action="{% url 'perfil_publico' usuario.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn-eliminar-confirmar">Eliminar</button>
+                                        <button type="button" class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li>No hay reseñas disponibles.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+
+    {% endif %}
+
+    <div class="boton_reseña">
+        <a href="{% url 'dejar_reseña' usuario_id=usuario.id %}" class="btn-dejar-reseña">Dejar Reseña</a>
+    </div>
+</div>
+
+<script>
+    // Función para abrir el modal
+    function abrirModal(formAction) {
+        var modal = document.getElementById('modal-eliminar');
+        var form = document.getElementById('form-eliminar');
+
+        // Actualiza el action del formulario con la URL de eliminación
+        form.action = formAction;
+
+        modal.style.display = "flex"; // Muestra el modal
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+        var modal = document.getElementById('modal-eliminar');
+        modal.style.display = "none"; // Cierra el modal
+        }
+
+        // Asociar la acción del botón de eliminar
+        document.querySelectorAll('.btn-eliminar').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevenir la acción por defecto del botón (redirección)
+            var formAction = this.closest('form').action; // Obtener la URL de eliminación
+            abrirModal(formAction); // Abrir el modal
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Seleccionamos todos los mensajes con la clase 'auto-hide'
+        const messages = document.querySelectorAll('.auto-hide');
+        
+        // Recorremos cada mensaje
+        messages.forEach(function (message) {
+            // Establecemos un temporizador para desaparecer el mensaje después de 5 segundos
+            setTimeout(function () {
+                message.style.opacity = 0; // Hace que el mensaje sea transparente
+                message.style.transition = 'opacity 1s'; // Hace que el cambio de opacidad sea suave
+            }, 3000); // 5000ms = 5 segundos
+        });
+    });
+</script>
+{% endblock %}

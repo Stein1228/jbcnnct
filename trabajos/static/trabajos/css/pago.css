@@ -1,0 +1,294 @@
+/* Contenedor principal */
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título principal */
+.page-title {
+    font-size: 2rem;
+    color: #34495e;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Información del trabajo seleccionado */
+.job-info {
+    background: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.job-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 15px;
+}
+
+.job-info p {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin: 5px 0;
+}
+
+.highlight {
+    font-weight: 600;
+    color: #3498db;
+}
+
+/* Opciones de pago */
+.payment-options {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.payment-option {
+    width: 140px;
+    height: 140px;
+    text-align: center;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    margin: 10px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.payment-option:hover {
+    background-color: #ecf0f1;
+    border-color: #3498db;
+}
+
+.payment-option.selected {
+    background-color: #3498db;
+    border-color: #2980b9;
+    color: white;
+}
+
+.payment-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.payment-option p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.payment-option.selected p {
+    color: white;
+}
+
+/* Estilo del botón de confirmación */
+.payment-form button {
+    padding: 14px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+}
+
+.payment-form button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.payment-form button:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+.payment-form button i {
+    margin-left: 10px;
+}
+
+/* Animación fade-in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-form {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .payment-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .payment-option {
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .payment-form button {
+        width: 100%;
+    }
+}
+
+/* Estilo del campo de entrada - Monto Final a Pagar */
+.payment-form .form-group {
+    margin-bottom: 20px;
+}
+
+.payment-form label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Estilo del contenedor del campo - Monto Final a Pagar */
+.payment-form .form-group {
+    margin-bottom: 30px;
+}
+
+/* Estilo del label (etiqueta) */
+.payment-form label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #34495e;
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Estilo del campo de entrada */
+.payment-form input[type="number"] {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1.2rem;
+    color: #2c3e50;
+    background-color: #f4f6f8;  /* Un gris suave */
+    border: 1px solid #dfe6e9;  /* Gris claro */
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    outline: none;
+}
+
+/* Estilo cuando el campo tiene el foco (focus) */
+.payment-form input[type="number"]:focus {
+    border-color: #3498db; /* Azul profesional */
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3); /* Sombra suave */
+}
+
+/* Placeholder con estilo más tenue */
+.payment-form input[type="number"]::placeholder {
+    color: #bdc3c7; /* Gris claro */
+    font-style: italic;
+}
+
+/* Estilo para el campo cuando hay un error */
+.payment-form input[type="number"]:invalid {
+    border-color: #e74c3c; /* Rojo suave */
+}
+
+/* Estilo de la sombra de error */
+.payment-form input[type="number"]:invalid:focus {
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.2); /* Sombra roja suave */
+}
+
+/* Texto de validación de error */
+.payment-form input[type="number"]:invalid + .error-message {
+    font-size: 0.9rem;
+    color: #e74c3c;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    opacity: 0.8;
+}
+
+/* Estilo general para el contenedor del formulario */
+.payment-form {
+    max-width: 600px; /* Formulario de ancho contenido */
+    margin: 0 auto;
+    padding: 40px 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado entre elementos dentro del formulario */
+.payment-form .form-group {
+    position: relative;
+}
+
+/* El botón de confirmación */
+.payment-form button {
+    padding: 14px 20px;
+    font-size: 1.1rem;
+    background-color: #3498db;  /* Azul */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.payment-form button:disabled {
+    background-color: #bdc3c7; /* Gris cuando está deshabilitado */
+    cursor: not-allowed;
+}
+
+.payment-form button:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+}
+
+/* Animación de desvanecimiento para el formulario */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-form {
+    animation: fadeIn 0.6s ease-in-out;
+}

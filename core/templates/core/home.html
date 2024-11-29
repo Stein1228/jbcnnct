@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/home.css' %}">
+{% endblock %}
+
+{% block title %}
+  JobConnect
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'core/js/home.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <header>
+    <h1>Bienvenido a JobConnect {{ user.first_name }} {{ user.last_name }}</h1>
+    <p>Conectando oportunidades laborales</p>
+  </header>
+  <div class="carousel">
+    <div class="carousel-track">
+        <div class="carousel-slide">
+            <img src="{% static 'core/images/jobconnect_info.png' %}" alt="Imagen 1">
+        </div>
+        <div class="carousel-slide">
+            <img src="{% static 'core/images/advertencia_trabajador.png' %}" alt="Imagen 2">
+        </div>
+        <div class="carousel-slide">
+            <img src="{% static 'core/images/advertencia_empleador.png' %}" alt="Imagen 3">
+        </div>
+    </div>
+  </div>
+  
+  
+    
+    <!-- Botones de navegación -->
+    <button class="carousel-btn left-btn">&#10094;</button>
+    <button class="carousel-btn right-btn">&#10095;</button>
+</div>
+
+  <div class="container-main">
+    <section class="welcome-section">
+      <p>Explora oportunidades y encuentra el trabajo ideal para ti.</p>
+      <p>JobConnect es una plataforma que tiene como objetivo ayudar a las personas a encontrar oportunidades laborales de una forma más fácil y conveniente.</p>
+      <p>Debido a que la tecnología está en constante evolución, el objetivo de nuestra plataforma es brindarle una oportunidad a cualquier persona que busque trabajo,
+        de forma que sea una experiencia más grata para todos.
+      </p>
+    </section>
+  
+    <section class="cifras py-5">
+      <div class="content d-flex justify-content-between flex">
+
+          <!-- Nuevo bloque para Usuarios Registrados -->
+          <div class="text-center">
+            <img alt="Icono usuarios registrados" src="{% static 'core/images/icons8-usuario-50.png' %}">
+            <div class="cifra" id="cifraUsuariosRegistrados" data-count="{{ usuarios_registrados }}">{{ usuarios_registrados }}</div>
+            <div class="texto">Usuarios registrados</div>
+          </div>
+
+          <!-- Nuevo bloque para Trabajos Postulados -->
+          <div class="text-center">
+              <img alt="Icono trabajos postulados" src="{% static 'core/images/icons8-negocio-50.png' %}">
+              <div class="cifra" id="cifraTrabajosPostulados" data-count="{{ trabajos_postulados }}">{{ trabajos_postulados }}</div>
+              <div class="texto">Trabajos publicados</div>
+          </div>
+
+          <!-- Nuevo bloque para Trabajos Realizados -->
+          <div class="text-center">
+            <img alt="Icono trabajos realizados" src="{% static 'core/images/icons8-me-gusta-50.png' %}">
+            <div class="cifra" id="cifraTrabajosRealizados" data-count="{{ trabajos_realizados }}">{{ trabajos_realizados }}</div>
+            <div class="texto">Trabajos finalizados</div>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+{% endblock %}

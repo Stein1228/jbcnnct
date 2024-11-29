@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Modificar reseña
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'usuarios/css/dejar_reseña.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="review-container">
+        <h2 class="review-title">Modificar reseña para {{ usuario_revisado.first_name }}</h2> <!-- Título de la sección -->
+
+        <!-- Formulario para modificar la reseña -->
+        <form method="post" enctype="multipart/form-data" class="review-form">
+            {% csrf_token %} <!-- Token para protección contra ataques CSRF -->
+            
+            <div class="form-group">
+                <label for="{{ form.contenido.id_for_label }}">reseña:</label> <!-- Etiqueta para el campo de reseña -->
+                {{ form.contenido }} <!-- Campo de contenido (texto de la reseña) -->
+                {% if form.contenido.errors %} <!-- Muestra errores si existen -->
+                    <div class="error">{{ form.contenido.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <div class="rating"> <!-- Contenedor para la calificación (estrellas) -->
+                    <input type="radio" id="star5" name="calificacion" value="5" {% if form.calificacion.value == 5 %} checked {% endif %} /> <!-- Radio para calificación 5 -->
+                    <label for="star5" class="star">★</label> <!-- Etiqueta para calificación 5 -->
+                    <input type="radio" id="star4" name="calificacion" value="4" {% if form.calificacion.value == 4 %} checked {% endif %} /> <!-- Radio para calificación 4 -->
+                    <label for="star4" class="star">★</label> <!-- Etiqueta para calificación 4 -->
+                    <input type="radio" id="star3" name="calificacion" value="3" {% if form.calificacion.value == 3 %} checked {% endif %} /> <!-- Radio para calificación 3 -->
+                    <label for="star3" class="star">★</label> <!-- Etiqueta para calificación 3 -->
+                    <input type="radio" id="star2" name="calificacion" value="2" {% if form.calificacion.value == 2 %} checked {% endif %} /> <!-- Radio para calificación 2 -->
+                    <label for="star2" class="star">★</label> <!-- Etiqueta para calificación 2 -->
+                    <input type="radio" id="star1" name="calificacion" value="1" {% if form.calificacion.value == 1 %} checked {% endif %} /> <!-- Radio para calificación 1 -->
+                    <label for="star1" class="star">★</label> <!-- Etiqueta para calificación 1 -->
+                </div>
+                {% if form.calificacion.errors %} <!-- Muestra errores de calificación si existen -->
+                    <div class="error">{{ form.calificacion.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <!-- Muestra imágenes asociadas a la reseña con opción para eliminar -->
+                {% for imagen in imagenes %}
+                    <div>
+                        <img src="{{ imagen.imagen.url }}" alt="Imagen de la reseña" width="100"> <!-- Muestra la imagen -->
+                        <input type="checkbox" name="delete_images" value="{{ imagen.id }}"> Eliminar <!-- Opción para eliminar la imagen -->
+                    </div>
+                {% endfor %}
+                {% if form.non_field_errors %} <!-- Muestra errores no asociados a campos específicos -->
+                    <div class="error">{{ form.non_field_errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="imagen" class="form-label">Subir imágenes (máximo 3):</label> <!-- Etiqueta para subir nuevas imágenes -->
+                <input type="file" name="new_imagen" id="imagen" accept="image/*" multiple class="file-input" aria-describedby="fileHelp"> <!-- Campo de carga de imágenes -->
+                {% if form.non_field_errors %} <!-- Muestra errores no asociados a campos específicos -->
+                    <div class="error">{{ form.non_field_errors }}</div>
+                {% endif %}
+            </div>
+    
+            <button type="submit" class="submit-button">Modificar reseña</button> <!-- Botón para enviar el formulario -->
+        </form>
+        
+        <!-- Enlace para volver al perfil del usuario revisado -->
+        <a href="{% url 'perfil_publico' usuario_revisado.id %}" class="btn-cancel">Volver al perfil</a>
+    </div>
+{% endblock %}

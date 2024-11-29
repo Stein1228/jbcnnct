@@ -1,0 +1,271 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Usuarios
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" 
+          integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="{% static 'usuarios/css/listar_usuarios.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" 
+            integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js" 
+            integrity="sha512-/IJVg2oav2TggiFftaMSPgttHNmgu/0RSGP64Nm7wqYwjkxj4hAHLRMJi3QNTa22f4pIkvTsCpB848HEilV6MA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funciones para manejar filtros
+            const regionSelect = document.querySelector('select[name="region"]');
+            const comunaSelect = document.querySelector('select[name="comuna"]');
+
+            regionSelect.addEventListener('change', function() {
+                const regionId = this.value;
+
+                // Hacer la solicitud AJAX para obtener las comunas
+                fetch(`/usuarios/filtrar-comunas/${regionId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Limpiar las opciones actuales en el select de comunas
+                        comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+
+                        // Agregar nuevas opciones basadas en la respuesta
+                        data.forEach(comuna => {
+                            const option = document.createElement('option');
+                            option.value = comuna.id;
+                            option.textContent = comuna.nombre;
+                            comunaSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        function toggleFilters() {
+            const filterOptions = document.querySelector('.filter-options');
+            const habilidadesSection = document.querySelector('.habilidades');
+            const filterIcon = document.getElementById('filter-icon');
+
+            filterOptions.classList.toggle('active');
+            habilidadesSection.classList.toggle('active'); 
+            filterIcon.src = filterOptions.classList.contains('active') 
+                ? "{% static 'usuarios/images/embu2.png' %}" // Imagen para "filtros abiertos"
+                : "{% static 'usuarios/images/embu1.png' %}"; // Imagen para "filtros cerrados"
+        }
+
+        function resetFilters() {
+            window.location.href = "{% url 'lista_usuarios' %}";
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+        // Comprobar si hay un mensaje que mostrar
+        const message = document.querySelector('.search-message');
+
+        if (message) {
+            // Temporizador para ocultar el mensaje después de 3 segundos
+            setTimeout(function() {
+                message.style.display = 'none';
+            }, 3000); // 3000ms = 3 segundos
+        }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los mensajes de búsqueda
+        const messages = document.querySelectorAll('.search-message');
+
+        // Verificar si existen mensajes en la página
+        if (messages.length > 0) {
+            messages.forEach(function(message) {
+                console.log('Mensaje encontrado, ocultando en 3 segundos...');
+                // Temporizador para ocultar el mensaje después de 3 segundos
+                setTimeout(function() {
+                    message.classList.add('hidden');
+                    console.log('Mensaje ocultado.');
+                }, 3000); // 3000ms = 3 segundos
+            });
+        }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+        // Seleccionamos todos los mensajes con la clase 'auto-hide'
+        const messages = document.querySelectorAll('.auto-hide');
+        
+            // Recorremos cada mensaje
+            messages.forEach(function (message) {
+                // Establecemos un temporizador para desaparecer el mensaje después de 5 segundos
+                setTimeout(function () {
+                    message.style.opacity = 0; // Hace que el mensaje sea transparente
+                    message.style.transition = 'opacity 1s'; // Hace que el cambio de opacidad sea suave
+                }, 3000); // 5000ms = 5 segundos
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="titulo">Encuentra a quien buscas</h1>
+    <hr class="divider"> 
+    <br>
+    {% if query or request.GET.habilidades or request.GET.region or request.GET.comuna %}
+    <div class="search-message">
+        {% if usuarios %}
+            <p class="success-message">Se encontraron {{ usuarios.paginator.count }} usuarios para los filtros aplicados.</p>
+        {% else %}
+            <p class="error-message">No se encontraron usuarios que coincidan con los filtros aplicados.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+    <div class="filter-form">
+        <form method="get" action="{% url 'lista_usuarios' %}" class="form-container">
+            <div class="search-bar">
+                <input type="text" name="query" placeholder="Buscar por nombre o apellido" value="{{ query|default:'' }}">
+                <button type="submit">Buscar</button>
+                <button class="filter-toggle" type="button" onclick="toggleFilters()">
+                    <img id="filter-icon" src="{% static 'usuarios/images/embu1.png' %}" alt="Más Filtros" width="20" height="20">
+                </button>
+            </div>
+
+            <div class="filter-options">
+                <div class="filter-section-rango">
+                    <label for="calificacion_minima">Calificación mínima</label>
+                    <input 
+                        type="range" 
+                        id="calificacion_minima" 
+                        name="calificacion_minima" 
+                        min="0" 
+                        max="5" 
+                        step="1" 
+                        value="{{ calificacion_minima|default:0 }}" 
+                        oninput="this.nextElementSibling.value = this.value + ' ★'" 
+                    >
+                    <output>{{ calificacion_minima|default:0 }} ★</output>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Ordenar por Calificación</h3>
+                    <select name="orden">
+                        <option value="asc" {% if orden == 'asc' %}selected{% endif %}>Ascendente</option>
+                        <option value="desc" {% if orden == 'desc' %}selected{% endif %}>Descendente</option>
+                    </select>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Región</h3>
+                    <select name="region">
+                        <option value="">Seleccione una región</option>
+                        {% for region in regiones %}
+                            <option value="{{ region.id }}" {% if region.id|stringformat:"i" == region_seleccionada %}selected{% endif %}>
+                                {{ region.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            
+                <div class="filter-section">
+                    <h3>Comuna</h3>
+                    <select name="comuna">
+                        <option value="">Seleccione una comuna</option>
+                        {% for comuna in comunas %}
+                            <option value="{{ comuna.id }}" {% if comuna.id|stringformat:"i" == comuna_seleccionada %}selected{% endif %}>
+                                {{ comuna.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" onclick="resetFilters()">Restablecer Filtros</button>
+                    <button type="submit">Filtrar</button>
+                </div>
+            </div>
+
+            <div class="filter-section habilidades">
+                <h3>Habilidades</h3>
+                <hr class="divider"> 
+                <br>
+                <div class="checkbox-group">
+                    {% for habilidad in habilidades %}
+                        <label>
+                            <input type="checkbox" name="habilidades" value="{{ habilidad.id }}"
+                                {% if habilidad.id|stringformat:"i" in habilidades_seleccionadas %}checked{% endif %}>
+                            {{ habilidad.nombre }}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="user-list">
+        <ul>
+            {% for usuario in usuarios %}
+                <li class="user-list-item">
+                    <div class="user-info">
+                        <div class="user-header">
+                            {% if usuario.foto_perfil %}
+                                <a href="{{ usuario.foto_perfil.url }}" data-lightbox="perfil" data-title="Foto de {{ usuario.first_name }}">
+                                    <img src="{{ usuario.foto_perfil.url }}" alt="Foto de {{ usuario.first_name }}" class="profile-image">
+                                </a>
+                            {% else %}
+                                <a href="{% static 'images/foto_perfil_defecto.svg' %}" data-lightbox="perfil" data-title="Foto de perfil por defecto">
+                                    <img src="{% static 'images/foto_perfil_defecto.svg' %}" alt="Foto de perfil por defecto" class="profile-image">
+                                </a>
+                            {% endif %}
+                            <div class="user-details">
+                                <strong>{{ usuario.first_name }} {{ usuario.last_name }}</strong>
+                                <p class="user-rating">
+                                    {% if usuario.calificacion_promedio == 0 %}
+                                        Sin reseñas
+                                    {% else %}
+                                        {{ usuario.calificacion_promedio|floatformat:1 }} ★
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <hr class="divider"> <!-- Línea negra divisoria -->
+                        <br>
+                        <p class="user-bio">
+                            {{ usuario.bio|default:"Sin biografía disponible"|slice:":100" }}{% if usuario.bio|length > 100 %}...{% endif %}
+                        </p>                        
+                        <a class="btn view-profile" href="{% url 'perfil_publico' usuario.id %}">Ver perfil</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if usuarios.has_previous %}
+                <a href="?page=1&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">&laquo; primera</a>
+                <a href="?page={{ usuarios.previous_page_number }}&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">anterior</a>
+            {% endif %}
+    
+            <span class="current">
+                Página {{ usuarios.number }} de {{ usuarios.paginator.num_pages }}.
+            </span>
+    
+            {% if usuarios.has_next %}
+                <a href="?page={{ usuarios.next_page_number }}&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">siguiente</a>
+                <a href="?page={{ usuarios.paginator.num_pages }}&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,166 @@
+.registration-form {
+    position: relative;
+    margin: 20px auto; /* Centra el formulario en la página */
+    width: 90%;
+    max-width: 600px; /* Ancho máximo del formulario */
+    background: #F7F7F7; /* Color de fondo claro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-sizing: border-box; /* Incluye el padding en el ancho total */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.registration-form h1 {
+    text-align: center; /* Centra el título */
+    padding-bottom: 20px; /* Espaciado inferior */
+    border-bottom: 3px solid black; /* Línea inferior para el título */
+}
+
+.registration-form form {
+    padding: 0 20px; /* Espaciado interno en el formulario */
+}
+
+.form-grid {
+    display: flex; /* Usa flexbox para crear columnas */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+    gap: 15px; /* Espacio entre columnas */
+    margin-top: 20px; /* Margen superior */
+}
+
+.alert {
+    color: red;  /* Color del texto del error */
+    background-color: #f8d7da;  /* Color de fondo del error */
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 20px); /* Dos columnas con espacio entre ellas */
+    margin: 10px 0; /* Espaciado vertical entre columnas */
+    position: relative; /* Para posicionar las etiquetas dentro del grupo */
+}
+
+.form-group input,
+.form-group select {
+    width: 100%; /* Ajusta el ancho al 100% */
+    padding: 0 5px; /* Espaciado interno horizontal */
+    height: 40px; /* Altura de los campos de entrada */
+    font-size: 16px; /* Tamaño de fuente */
+    border: 1px solid #adadad; /* Borde gris claro */
+    background-color: #ffffff; /* Color de fondo blanco */
+    outline: none; /* Sin borde de enfoque */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.form-group label {
+    position: absolute; /* Posiciona la etiqueta dentro del grupo */
+    top: 50%; /* Centra verticalmente */
+    left: 10px; /* Margen izquierdo */
+    color: #adadad; /* Color gris claro para la etiqueta */
+    transform: translateY(-50%); /* Centra la etiqueta verticalmente */
+    font-size: 16px; /* Tamaño de fuente de la etiqueta */
+    pointer-events: none; /* Evita que la etiqueta interfiera con los clics */
+    transition: 0.5s; /* Transición suave para el movimiento */
+}
+
+/* Efecto de movimiento al enfocar o tener un valor en el input */
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
+    top: -10px; /* Mueve la etiqueta hacia arriba */
+    left: 10px; /* Mantiene la posición horizontal */
+    color: black; /* Cambia el color a negro */
+    font-size: 14px; /* Disminuye el tamaño de la fuente */
+}
+
+.submit-button {
+    width: 100%; /* Ocupa el 100% del ancho disponible */
+    height: 50px; /* Altura del botón */
+    border: 2px solid #000000; /* Borde sólido negro */
+    background: none; /* Sin fondo */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    color: rgb(0, 0, 0); /* Texto en negro */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+    margin-top: 10px; /* Espaciado superior */
+    border-radius: 25px; /* Bordes redondeados para el botón */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Efecto de transición */
+}
+
+.submit-button:hover {
+    background-color: #000000; /* Fondo negro al pasar el cursor */
+    color: white; /* Texto blanco en hover */
+}
+
+/* Estilo del contenedor de "Iniciar sesión" */
+.login-prompt {
+    text-align: center; /* Centra el texto y el enlace */
+    margin-top: 20px; /* Margen superior */
+}
+
+.login-prompt p {
+    font-size: 14px; /* Tamaño de fuente para el texto */
+    color: #555; /* Color gris suave para el texto */
+    margin-bottom: 20px; /* Separación debajo del texto */
+}
+
+/* Estilo del enlace de "Iniciar sesión" */
+.login-prompt a {
+    font-size: 16px; /* Tamaño de fuente para el enlace */
+    color: black; /* Texto negro */
+    text-decoration: none; /* Elimina el subrayado */
+    font-weight: bold; /* Texto en negrita */
+    padding: 8px 15px; /* Espaciado alrededor del enlace */
+    border-radius: 25px; /* Bordes redondeados */
+    border: 2px solid black; /* Borde negro */
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.login-prompt a:hover {
+    background-color: black; /* Fondo negro en hover */
+    color: white; /* Texto blanco en hover */
+}
+
+/* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .registration-form {
+        width: 90%; /* Ancho del formulario en pantallas pequeñas */
+        padding: 10px; /* Espaciado interno */
+    }
+
+    .registration-form h1 {
+        font-size: 1.5rem; /* Tamaño de fuente del título */
+    }
+
+    .registration-form form {
+        padding: 0 20px; /* Espaciado interno en el formulario */
+    }
+
+    .form-group input,
+    .form-group select {
+        height: 35px; /* Altura reducida en pantallas pequeñas */
+    }
+
+    .submit-button {
+        height: 45px; /* Altura del botón en pantallas pequeñas */
+        font-size: 16px; /* Tamaño de fuente */
+    }
+
+    .form-grid .form-group {
+        flex: 1 1 100%; /* Ocupa el 100% en pantallas pequeñas */
+    }
+}
+
+/* Estilo para mensajes de alerta */
+.alert {
+    background-color: #f8d7da; /* Color de fondo para la alerta */
+    color: #721c24; /* Color de texto para la alerta */
+    border: 1px solid #f5c6cb; /* Borde para la alerta */
+    padding: 15px; /* Espaciado interno */
+    margin-bottom: 15px; /* Margen inferior */
+    border-radius: 5px; /* Bordes redondeados */
+}

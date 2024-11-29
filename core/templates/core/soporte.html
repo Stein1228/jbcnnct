@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/soporte.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'core/js/soporte.js' %}"></script>
+{% endblock %}
+
+
+{% block title %}Soporte - JobConnect{% endblock %}
+
+{% block content %}
+<div class="support-container">
+  <h1 class="titulo-soporte">Soporte
+  </h1>
+    <!-- Centro de ayuda -->
+    <section class="support-section">
+        <h2>1. Centro de ayuda</h2>
+        
+        <div class="support-content">
+            <h3>Guías sobre el uso de las funciones principales de la página</h3>
+            <p>
+                Bienvenido al Centro de Ayuda de nuestra plataforma. Aquí encontrarás guías detalladas para aprovechar al máximo las herramientas que ofrecemos.
+            </p>
+            <ul>
+                <li>
+                    <strong>Crear perfil:</strong> Aprende a crear un perfil atractivo y completo que resalte tus habilidades.
+                </li>
+                <li>
+                    <strong>Habilidades seleccionables:</strong> Nuestra plataforma permite seleccionar habilidades específicas como jardinería, gasfitería, o trabajos eléctricos.
+                </li>
+                <li>
+                    <strong>Propósito de la plataforma:</strong> Diseñada para aquellos que buscan trabajos rápidos y flexibles.
+                </li>
+            </ul>
+
+            <h3>Creación de Cuenta</h3>
+            <p>
+                JobConnect proporciona un sistema, en el cual existe un usuario general, el cual tiene las capacidades de poder postular y ofrecer trabajos, por ende, para poder comenzar a usar nuestra plataforma, necesitas crear una cuenta. Selecciona
+                <a href="{% url 'login' %}"><strong>Ingresar</strong></a> y luego 
+                <a href="{% url 'register' %}"><strong>Registrarse</strong></a> para crear tu perfil.
+            </p>
+
+            <h3>Creación de Trabajo</h3>
+            <p>
+                JobConnect también proporciona un sistema de trabajos, los cuales se facilita su accesibilidad para que todos los usuarios de JobConnect también puedan encontrar trabajos para que se puedan postular publicar, por ende, para crear un nuevo trabajo, ve a la sección de 
+                <a href="{% url 'crear_trabajo' %}"><strong>Crear Trabajo</strong></a>. 
+                Aquí podrás ingresar los detalles del trabajo, como fecha, lugar, habilidades necesarias, y rango de pago.
+            </p>
+
+            <h3>Función de Reseñas</h3>
+            <p>
+                Para dejar una reseña sobre un trabajador o empleador, dirígete al perfil correspondiente. 
+                Selecciona <a href="{% url 'lista_usuarios' %}"><strong>Perfil del Usuario</strong></a> y completa la reseña según tu experiencia, cada reseña afectara al usuario, por lo cual si tienes buenas reseñas seras mayormente recomendado para los empleadores.
+            </p>
+        </div>
+    </section>
+
+    <!-- Seguridad, privacidad y recursos educativos externos -->
+    <section class="support-section">
+        <h2>2. Seguridad, privacidad y recursos educativos externos</h2>
+
+        <div class="support-content">
+            <h3>Explicación de políticas de privacidad y uso de datos</h3>
+            <p>
+                En nuestra plataforma, valoramos tu privacidad. Utilizamos tus datos personales solo para optimizar tu experiencia.
+            </p>
+            <ul>
+                <li><strong>¿Qué datos se recopilan?</strong> Recopilamos información básica, como nombre, ubicación y habilidades.</li>
+                <li><strong>¿Para qué se usan los datos?</strong> Tus datos se utilizan únicamente para conectarte con otros usuarios.</li>
+                <li><strong>¿Quién tiene acceso?</strong> Solo el equipo de soporte autorizado tiene acceso a los datos.</li>
+            </ul>
+
+            <h3>Consejos para proteger tu cuenta</h3>
+            <ul>
+                <li><strong>Usa una contraseña fuerte:</strong> Usa una combinación de letras, números y símbolos.</li>
+                <li><strong>Activa la verificación en dos pasos:</strong> Para una capa adicional de seguridad.</li>
+            </ul>
+
+            <h3>Materiales educativos en seguridad</h3>
+            <p>Aprende más sobre seguridad en línea con estos recursos visuales y prácticos:</p>
+            <ul>
+                <li><a href="https://www.cisa.gov/" target="_blank">CISA - Agencia de Seguridad</a></li>
+                <li><a href="https://www.eff.org/" target="_blank">EFF - Privacidad en Línea</a></li>
+            </ul>
+
+            <h3>Enlaces a recursos confiables</h3>
+            <ul>
+                <li><a href="https://www.cisa.gov/" target="_blank">CISA</a></li>
+                <li><a href="https://www.ncsc.gov.uk/" target="_blank">NCSC del Reino Unido</a></li>
+            </ul>
+
+            <h3>Actualizaciones de terceros sobre nuevas amenazas de seguridad</h3>
+            <p>Mantenemos a los usuarios informados sobre amenazas emergentes en el sector de ciberseguridad.</p>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,116 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Trabajos Asignados
+{% endblock %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/ver_trabajos.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container-main">
+        <h2 class="Titulo">Trabajos Asignados</h2>
+        
+        <!-- Botón para alternar entre trabajos completados y no completados -->
+        <div class="filtro-completado">
+            <a href="?completado={{ completado_opuesto|yesno:'True,False' }}" class="btn filtro-btn">
+                {% if completado %}
+                    Ver trabajos no completados
+                {% else %}
+                    Ver trabajos completados
+                {% endif %}
+            </a>
+        </div>
+
+        <!-- Mostrar mensajes de Django -->
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        <i class="fas fa-exclamation-circle"></i> <!-- Ícono de exclamación -->
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if trabajos %}
+            <ul>
+                {% for trabajo in trabajos %}
+                    <div class="carta">
+                        <!-- Cabecera de la carta -->
+                        <div class="carta-header">
+                            <h2 class="titulo">{{ trabajo.titulo }}</h2>
+                            {% if trabajo.is_completado %}
+                                <span class="completado-label">Completado</span>
+                            {% endif %}
+                            <div class="info-header">
+                                <div class="info-item fecha">
+                                    <span class="icon">📅</span>
+                                    <strong>{{ trabajo.fecha_creacion|date:"d M Y" }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Cuerpo de la carta -->
+                        <div class="carta-body">
+                            <div class="descripcion-container">
+                                <p><strong>Descripción:</strong> {{ trabajo.descripcion }}</p>
+                            </div>
+                            
+                            <div class="nuevos-datos">
+                                {% load l10n %}
+                                <div class="dato">
+                                    <strong>Presupuesto Mínimo:</strong>
+                                    <p>${{ trabajo.presupuesto_minimo|localize }}</p>
+                                </div>
+                                <div class="dato">
+                                    <strong>Presupuesto Máximo:</strong>
+                                    <p>${{ trabajo.presupuesto_maximo|localize }}</p>
+                                </div>
+                                <div class="dato">
+                                    <strong>Comuna:</strong>
+                                    <p>{{ trabajo.comuna }}</p>
+                                </div>
+                                <div class="dato">
+                                    <strong>Región:</strong>
+                                    <p>{{ trabajo.region }}</p>
+                                </div>
+                            </div>
+                    
+                            {% if trabajo.habilidades.all %}
+                                <p><strong>Habilidades Requeridas:</strong></p>
+                                <div class="habilidades-container">
+                                    {% for habilidad in trabajo.habilidades.all %}
+                                        <span class="habilidad">{{ habilidad.nombre }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p><strong>Habilidades Requeridas:</strong> No se han especificado habilidades.</p>
+                            {% endif %}
+                        </div>
+                    
+                        <!-- Línea de separación -->
+                        <hr class="linea-separadora">
+                    
+                        <!-- Botones de acción -->
+                        <div class="acciones">
+                            <!-- Solo muestra el botón "Ver Resumen" -->
+                            <a href="{% url 'match' trabajo.id %}" class="btn resumen-btn">Ver Resumen</a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <li>No tienes trabajos asignados.</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="message {{ message.tags }}">
+                <i class="fas fa-exclamation-circle"></i> <!-- Ícono de exclamación -->
+                No tienes trabajos asignados.
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

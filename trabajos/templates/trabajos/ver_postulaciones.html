@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% block title %}
+    Postulaciones
+{% endblock %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/postulaciones.css' %}">
+{% endblock %}
+{% block content %} 
+    <div class="carta">
+        <h1>Postulaciones para: {{ trabajo.titulo }}</h1>
+        <ul class="postulaciones-lista">
+            {% for postulacion in postulaciones %}
+            <li class="postulacion-item">
+                <strong>Usuario:</strong> {{ postulacion.usuario_postulante.get_full_name }}<br>
+                <strong>Comentario:</strong> {{ postulacion.comentario }}<br>
+                <strong>Contacto:</strong> {{ postulacion.usuario_postulante.numero_telefono }}<br>
+                <strong>Fecha de Postulación:</strong> {{ postulacion.fecha_postulacion }}<br>
+                <br>
+                <a class="view-profile"href="{% url 'perfil_publico' postulacion.usuario_postulante.id %}">Ver perfil</a>
+                {% if trabajo.trabajador_seleccionado %}
+                <!-- Si ya hay un trabajador seleccionado, muestra el botón "Ver Resumen" -->
+                <a href="{% url 'match' trabajo.id %}" class="view-profile">Ver Resumen</a>
+                {% else %}
+                    <!-- Si no hay trabajador seleccionado, muestra el botón "Seleccionar Trabajador" -->
+                    <a href="{% url 'seleccionar_trabajador' trabajo.id postulacion.id %}" class="view-profile">Seleccionar Trabajador</a>
+                {% endif %}
+                {% endfor %}
+            </li>
+        </ul>
+        <a href="{% url 'ver_trabajos' %}" class="volver-btn">Volver a la lista de trabajos</a>
+    </div>
+{% endblock %}

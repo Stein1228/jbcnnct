@@ -1,0 +1,99 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block title %} Editar trabajo {% endblock %}
+
+{% block  extra_css%}
+<link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/crear_editar_trabajo.css' %}">
+{% endblock %}
+
+{% block  extra_js%}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const regionSelect = document.getElementById('id_region');
+        const comunaSelect = document.getElementById('id_comuna');
+
+        regionSelect.addEventListener('change', function () {
+            const regionId = regionSelect.value;
+
+            if (regionId) {
+                fetch(`/usuarios/filtrar-comunas/${regionId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+
+                        data.forEach(comuna => {
+                            const option = document.createElement('option');
+                            option.value = comuna.id;
+                            option.textContent = comuna.nombre;
+                            comunaSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching comunas:', error));
+            } else {
+                comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+            }
+        });
+    });
+</script>
+{% endblock  %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title">Editar trabajo</h1>
+    <form method="POST" enctype="multipart/form-data" class="crear-trabajo-form" >
+        {% csrf_token %}
+    
+        <div class="form-columns">
+            <div class="column">
+                <div class="form-group">
+                    <label for="id_titulo" class="form-label">Titulo</label>
+                    {{ form.titulo }}
+                </div>
+                <div class="form-group">
+                    <label for="id_descripcion" class="form-label">Descripcion</label>
+                    {{ form.descripcion }}
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="form-group">
+                    <label for="id_presupuesto_minimo" class="form-label">Presupuesto minimo</label>
+                    {{ form.presupuesto_minimo }}
+                </div>
+                <div class="form-group">
+                    <label for="id_presupuesto_maximo" class="form-label">Presupuesto maximo</label>
+                    {{ form.presupuesto_maximo }}
+                </div>
+                <div class="form-group">
+                    <label for="id_region" class="form-label">Región:</label>
+                    {{ form.region }}
+                </div>
+                <div class="form-group">
+                    <label for="id_comuna" class="form-label">Comuna:</label>
+                    {{ form.comuna }}
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-section habilidades">
+            <h3>Habilidades</h3>
+            <hr class="divider"> 
+            <br>
+            <div class="checkbox-group">
+                {% for habilidad in form.habilidades %}
+                    <label>
+                        {{ habilidad}}
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="btn submit-button">Editar trabajo</button>
+        </div>
+    </form>
+    <a href="{% url 'ver_trabajos' %}" class="btn-cancel">Cancelar</a>
+</div>
+{% endblock %}

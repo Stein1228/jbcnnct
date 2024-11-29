@@ -1,0 +1,65 @@
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilita el scroll si es necesario */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro y semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Color de fondo del contenido */
+    margin: 15% auto; /* Margen superior e inferior */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde del contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    width: 300px; /* Ancho del contenido */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del contenido */
+    text-align: center; /* Centrar texto */
+}
+
+.close-btn {
+    color: #aaa; /* Color del botón de cerrar */
+    float: right; /* Alinear a la derecha */
+    font-size: 28px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Color al pasar el mouse */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+.confirm-btn {
+    background-color: #e74c3c; /* Color de fondo del botón de confirmación */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición suave para el color */
+}
+
+.confirm-btn:hover {
+    background-color: #c0392b; /* Color más oscuro al pasar el mouse */
+}
+
+.cancel-btn {
+    display: inline-block; /* Para que el enlace se comporte como un botón */
+    margin-top: 10px; /* Espaciado superior */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #3498db; /* Color de fondo del botón de cancelar */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el color */
+}
+
+.cancel-btn:hover {
+    background-color: #2980b9; /* Color más oscuro al pasar el mouse */
+}

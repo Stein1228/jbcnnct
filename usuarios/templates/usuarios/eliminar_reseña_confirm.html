@@ -1,0 +1,10 @@
+<div id="modal-eliminar" class="modal">
+    <div class="modal-contenido">
+        <h3>¿Estás seguro de que deseas eliminar esta reseña?</h3>
+        <form id="form-eliminar" action="{% url 'perfil_publico' usuario_id=reseña.usuario.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-eliminar-confirmar">Eliminar</button>
+            <button type="button" class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+        </form>
+    </div>
+</div>

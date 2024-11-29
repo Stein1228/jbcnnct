@@ -1,0 +1,269 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+{% load l10n %}
+{% block title %}
+    Trabajos
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/trabajo.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" 
+            integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js" 
+            integrity="sha512-/IJVg2oav2TggiFftaMSPgttHNmgu/0RSGP64Nm7wqYwjkxj4hAHLRMJi3QNTa22f4pIkvTsCpB848HEilV6MA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funciones para manejar filtros
+            const regionSelect = document.querySelector('select[name="region"]');
+            const comunaSelect = document.querySelector('select[name="comuna"]');
+
+            regionSelect.addEventListener('change', function() {
+                const regionId = this.value;
+
+                // Hacer la solicitud AJAX para obtener las comunas
+                fetch(`/usuarios/filtrar-comunas/${regionId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Limpiar las opciones actuales en el select de comunas
+                        comunaSelect.innerHTML = '<option value="">Seleccione una comuna</option>';
+
+                        // Agregar nuevas opciones basadas en la respuesta
+                        data.forEach(comuna => {
+                            const option = document.createElement('option');
+                            option.value = comuna.id;
+                            option.textContent = comuna.nombre;
+                            comunaSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            });
+        });
+
+        function toggleFilters() {
+            const filterOptions = document.querySelector('.filter-options');
+            const habilidadesSection = document.querySelector('.habilidades');
+            const filterIcon = document.getElementById('filter-icon');
+
+            filterOptions.classList.toggle('active');
+            habilidadesSection.classList.toggle('active'); 
+            filterIcon.src = filterOptions.classList.contains('active') 
+                ? "{% static 'usuarios/images/embu2.png' %}" // Imagen para "filtros abiertos"
+                : "{% static 'usuarios/images/embu1.png' %}"; // Imagen para "filtros cerrados"
+        }
+
+        function resetFilters() {
+            window.location.href = "{% url 'trabajos' %}";
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+        // Obtener todos los mensajes de búsqueda
+        const messages = document.querySelectorAll('.search-message');
+
+        // Verificar si existen mensajes en la página
+        if (messages.length > 0) {
+            messages.forEach(function(message) {
+                console.log('Mensaje encontrado, ocultando en 3 segundos...');
+                // Temporizador para ocultar el mensaje después de 3 segundos
+                setTimeout(function() {
+                    message.classList.add('hidden');
+                    console.log('Mensaje ocultado.');
+                }, 3000); // 3000ms = 3 segundos
+            });
+        }
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="filter-form">
+        <h1 class="titulo">Encuentra el trabajo que buscas</h1>
+        <hr class="divider">
+        <br>
+                <!-- Mostrar los mensajes de Django -->
+        {% if messages %}
+        <div class="message-container">
+            {% for message in messages %}
+                <div class="search-message {% if message.tags == 'success' %}success-message{% elif message.tags == 'info' %}info-message{% endif %}">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <!-- Mensaje de resultados de búsqueda, si hay filtros aplicados o búsqueda -->
+        {% if search_query or request.GET.habilidades or request.GET.region or request.GET.comuna %}
+            <div class="search-message">
+                {% if trabajos %}
+                    <p class="success-message">Se encontraron {{ trabajos.paginator.count }} trabajos para los filtros aplicados.</p>
+                {% else %}
+                    <p class="error-message">No se encontraron trabajos que coincidan con los filtros aplicados.</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        <form method="GET" action="{% url 'trabajos' %}" class="form-container">
+            
+            <!-- Barra de búsqueda -->
+            <div class="search-bar">
+                <input type="text" name="search" placeholder="Buscar trabajo..." value="{{ search_query }}">
+                <button type="submit">Buscar</button>
+                <button class="filter-toggle" type="button" onclick="toggleFilters()">
+                    <img id="filter-icon" src="{% static 'usuarios/images/embu1.png' %}" alt="Más Filtros" width="20" height="20">
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filter-options">
+                
+                <!-- Filtro por habilidades -->
+                <div class="filter-section habilidades">
+                    <h3>Habilidades</h3>
+                    <hr class="divider">
+                    <br>
+                    <div class="checkbox-group">
+                        {% for habilidad in habilidades %}
+                            <label>
+                                <input type="checkbox" name="habilidades" value="{{ habilidad.id }}"
+                                    {% if habilidad.id in request.GET.habilidades %}checked{% endif %}>
+                                {{ habilidad.nombre }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Filtro por región -->
+                <div class="filter-section">
+                    <h3>Región</h3>
+                    <select name="region">
+                        <option value="">Seleccione una región</option>
+                        {% for region in regiones %}
+                            <option value="{{ region.id }}" {% if region.id == request.GET.region %}selected{% endif %}>
+                                {{ region.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Filtro por comuna -->
+                <div class="filter-section">
+                    <h3>Comuna</h3>
+                    <select name="comuna">
+                        <option value="">Seleccione una comuna</option>
+                        {% for comuna in comunas %}
+                            <option value="{{ comuna.id }}" {% if comuna.id == request.GET.comuna %}selected{% endif %}>
+                                {{ comuna.nombre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <!-- Botones de acción -->
+                <div class="form-actions">
+                    <button type="button" onclick="resetFilters()">Restablecer Filtros</button>
+                    <button type="submit">Filtrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lista de trabajos -->
+    {% for trabajo in trabajos %}
+        <div class="container-carta">
+            <div class="carta">
+                <div class="carta-header">
+                    <h2 class="titulo">{{ trabajo.titulo }}</h2>
+                    <div class="info-header">
+                        <div class="info-item creador">
+                            <span class="icon">👤</span>
+                            <strong>{{ trabajo.usuario_creador.get_full_name }}</strong>
+                        </div>
+                        <div class="info-item fecha">
+                            <span class="icon">📅</span>
+                            <strong>{{ trabajo.fecha_creacion }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carta-body">
+                    <div class="descripcion-container">
+                        <p><strong>Descripción:</strong> {{ trabajo.descripcion }}</p>
+                    </div>
+
+                    <div class="nuevos-datos">
+                        <div class="dato">
+                            <strong>Presupuesto Mínimo:</strong>
+                            <p>${{ trabajo.presupuesto_minimo |localize }}</p>
+                        </div>
+                        <div class="dato">
+                            <strong>Presupuesto Máximo:</strong>
+                            <p>${{ trabajo.presupuesto_maximo |localize }}</p>
+                        </div>
+                        <div class="dato">
+                            <strong>Comuna:</strong>
+                            <p>{{ trabajo.comuna }}</p>
+                        </div>
+                        <div class="dato">
+                            <strong>Región:</strong>
+                            <p>{{ trabajo.region }}</p>
+                        </div>
+                    </div>
+
+                {% if trabajo.habilidades.all %}
+                    <p><strong>Habilidades Requeridas:</strong></p>
+                    <div class="habilidades-container">
+                        {% for habilidad in trabajo.habilidades.all %}
+                            <span class="habilidad">{{ habilidad.nombre }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p><strong>Habilidades Requeridas:</strong> No se han especificado habilidades.</p>
+                {% endif %}
+            </div>
+
+            <hr class="linea-separadora">
+
+            <!-- Botones de acción -->
+            <div class="acciones">
+                {% if request.user != trabajo.usuario_creador %}
+                    {% if trabajo.id in postulaciones_trabajos %}
+                        <span class="btn postulado-btn">Ya postulaste</span>
+                    {% else %}
+                        <a href="{% url 'postular_trabajo' trabajo.id %}" class="btn postular-btn">Postular</a>
+                    {% endif %}
+                    <a href="{% url 'detalle_trabajo' trabajo.id %}" class="btn ver-btn">Ver Trabajo</a>
+                {% endif %}
+            </div>
+        </div>
+
+    {% empty %}
+        <div class="no-result-message">
+            <p>No se han encontrado trabajos disponibles.</p>
+        </div>
+    {% endfor %}
+
+    <!-- Paginación -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if trabajos.has_previous %}
+                <a href="?page=1&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">&laquo; primera</a>
+                <a href="?page={{ trabajos.previous_page_number }}&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">anterior</a>
+            {% endif %}
+
+            <span class="current">
+                Página {{ trabajos.number }} de {{ trabajos.paginator.num_pages }}.
+            </span>
+
+            {% if trabajos.has_next %}
+                <a href="?page={{ trabajos.next_page_number }}&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">siguiente</a>
+                <a href="?page={{ trabajos.paginator.num_pages }}&query={{ query }}&calificacion_minima={{ calificacion_minima }}&orden={{ orden }}&region={{ region_seleccionada }}&comuna={{ comuna_seleccionada }}&habilidades={{ habilidades_seleccionadas|join:',' }}">última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+{% endblock %}

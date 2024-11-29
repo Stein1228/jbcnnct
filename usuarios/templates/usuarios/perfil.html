@@ -1,0 +1,230 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Perfil
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'usuarios/css/perfil.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" 
+          integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" 
+            integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js" 
+            integrity="sha512-/IJVg2oav2TggiFftaMSPgttHNmgu/0RSGP64Nm7wqYwjkxj4hAHLRMJi3QNTa22f4pIkvTsCpB848HEilV6MA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block content %}
+    <!-- Mostrar mensajes de Django -->
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+                <i class="fas fa-exclamation-circle"></i> <!-- Ícono de exclamación -->
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+        <div class="profile-container">
+            <div class="profile-edit-container">
+                <a href="{% url 'trabajos_asignados' %}" class="btn profile-edit">Ver Trabajos Asignados</a>
+                <a href="{% url 'ver_trabajos' %}" class="btn profile-edit">Mis trabajos</a>
+                <a href="{% url 'editar_perfil' %}" class="btn profile-edit">Editar Perfil</a>
+            </div>
+
+            <div class="profile-header">
+                <div class="profile-image">
+                    {% if user.foto_perfil %}
+                        <a href="{{ user.foto_perfil.url }}" data-lightbox="perfil" data-title="Foto de {{ user.first_name }}">
+                            <img src="{{ user.foto_perfil.url }}" alt="Foto de perfil de {{ user.first_name }} {{ user.last_name }}" class="profile-image">
+                        </a>
+                    {% else %}
+                        <a href="{% static 'images/foto_perfil_defecto.svg' %}" data-lightbox="perfil" data-title="Foto de perfil por defecto">
+                            <img src="{% static 'images/foto_perfil_defecto.svg' %}" alt="Foto de perfil por defecto" class="profile-image">
+                        </a>
+                    {% endif %}
+                </div>                
+                <div class="profile-name">
+                    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+                    <h1>{{ user.calificacion_promedio|floatformat:1 }} ★</h1>
+                    <ul class="profile-info-list">
+                        <li><p>{{ edad }} años</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                <p class="profile-label">Biografía</p>
+                <div class="profile-content">
+                    <p class="bio">{{ user.bio }}</p>
+                </div>
+            </div>
+
+            <div class="profile-grid">
+                <div class="profile-section">
+                    <h2>Datos Personales</h2>
+                    <div class="profile-item">
+                        <p class="profile-label">Nombre completo</p>
+                        <div class="profile-content">
+                            {{ user.first_name }} 
+                            {% if user.s_nombre %}{{ user.s_nombre }} {% endif %}
+                            {{ user.last_name }} 
+                            {% if user.s_apellido %}{{ user.s_apellido }}{% endif %}
+                        </div>
+                    </div>
+
+                    {% if user.region and user.comuna %}
+                        <div class="profile-item">
+                            <p class="profile-label">Comuna</p>
+                            <div class="profile-content">
+                                {{user.comuna}}, {{user.region}}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="profile-item">
+                            <p class="profile-label">Comuna</p>
+                            <div class="profile-content">
+                                <p class="no-habilidades-message" >No tienes seleccionada tu ubicacion, hazlo editando tu perfil<p/>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="profile-item">
+                        <p class="profile-label">Fecha de Nacimiento</p>
+                        <div class="profile-content">{{ user.fecha_nacimiento }}</div>
+                    </div>
+
+                    <div class="profile-item horizontal-items">
+                        <div class="gender-nationality">
+                            <div class="profile-item">
+                                <p class="profile-label">Género</p>
+                                <div class="profile-content">
+                                    {% if user.genero == 'M' %} Masculino
+                                    {% elif user.genero == 'F' %} Femenino
+                                    {% elif user.genero == 'O' %} Otro
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="profile-item">
+                                <p class="profile-label">Nacionalidad</p>
+                                <div class="profile-content"> 
+                                    {% if user.nacionalidad == 'CL' %} Chilena
+                                    {% elif user.nacionalidad == 'AR' %} Argentina
+                                    {% elif user.nacionalidad == 'BR' %} Brasileña
+                                    {% elif user.nacionalidad == 'VE' %} Venezolana
+                                    {% elif user.nacionalidad == 'PE' %} Peruana
+                                    {% elif user.nacionalidad == 'CO' %} Colombiana
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Conocimientos</h2>
+                    <div class="profile-add">
+                        <ul>
+                            {% for habilidad in user.habilidades.all %}
+                                <li><p>{{ habilidad.nombre }}</p></li>
+                            {% empty %}
+                                <li>
+                                    <p class="no-habilidades-message">No tienes habilidades registradas. Puedes agregarlas editando tu perfil.</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>                    
+                </div>
+
+                <div class="profile-section">
+                    <h2>Contacto</h2>
+                    <div class="profile-item">
+                        <p class="profile-label">Teléfono</p>
+                        <div class="profile-content">{{ user.numero_telefono }}</div>
+                    </div>
+                    <div class="profile-item">
+                        <p class="profile-label">Correo Electrónico</p>
+                        <div class="profile-content">{{ user.email }}</div>
+                    </div>
+                    <h2>Redes Sociales</h2>
+                    <div class="profile-item">
+                        <p class="profile-label">Instagram</p>
+                        <div class="profile-content">
+                            {% if user.instagram %}
+                                <a href="{{ user.instagram }}" target="_blank">{{ user.instagram }}</a>
+                            {% else %}
+                                <p class="no-social-message">No tienes un perfil de Instagram registrado. Agregarlo editando tu perfil.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <p class="profile-label">Facebook</p>
+                        <div class="profile-content">
+                            {% if user.facebook %}
+                                <a href="{{ user.facebook }}" target="_blank">{{ user.facebook }}</a>
+                            {% else %}
+                                <p class="no-social-message">No tienes un perfil de Facebook registrado. Agregarlo editando tu perfil.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h2>Actividad</h2>
+                    <div class="profile-item horizontal-items">
+                        <div class="gender-nationality">
+                            <div class="profile-item">
+                                <p class="profile-label">Trabajos realizados</p>
+                                <p>{{ user.trabajos_realizados }}</p>
+                            </div>
+                            <div class="profile-item">
+                                <p class="profile-label">Trabajos solicitados</p>
+                                <p>{{ user.trabajos_solicitados }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if reseñas %}
+                <div class="container-resenas">
+                    <h2>Reseñas</h2>
+                    <ul>
+                        {% for reseña in reseñas %}
+                            <li>
+                                <div class="review-card">
+                                    <div class="review-header">
+                                        <span class="review-username">Reseña de: {{ reseña.usuario_revisor.get_full_name }}</span>
+                                        <span class="review-date">{{ reseña.fecha_creacion|date:"d/m/Y" }}</span>
+                                        <span class="review-nota">{{ reseña.calificacion }} ★</span>
+                                    </div>
+                                    <div class="review-comment">
+                                        <p>{{ reseña.contenido }}</p>
+                                    </div>
+                                    
+                                    {% if reseña.imagenes.all %}
+                                        <div class="imagenes-reseña">
+                                            {% for imagen in reseña.imagenes.all %}
+                                                <a href="{{ imagen.imagen.url }}" data-lightbox="reseña-{{ reseña.id }}" data-title="Imagen de la reseña">
+                                                    <img src="{{ imagen.imagen.url }}" alt="Imagen de la reseña" class="imagen-reseña">
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li>No hay reseñas disponibles.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

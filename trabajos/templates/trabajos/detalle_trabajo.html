@@ -1,0 +1,89 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/detalle_trabajo.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="trabajo-detalles">
+        {% if request.user.is_staff %}
+            <div class="botones-trabajo">
+                <!-- Botón de editar trabajo -->
+                <a href="{% url 'editar_trabajo' trabajo.id %}" class="btn-editar">Editar</a>
+                
+                <!-- Formulario de eliminar trabajo -->
+                <form action="{% url 'eliminar_trabajo' trabajo.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-eliminar">Eliminar</button>
+                </form>
+            </div>
+        {% endif %}
+        
+        <h1 class="trabajo-titulo">{{ trabajo.titulo }}</h1>
+
+        <!-- Sección de Fecha de Creación y Creador -->
+        <div class="fecha-creacion">
+            <div class="fecha-item">
+                <i class="fas fa-calendar-alt">📅</i>
+                <span><strong>Trabajo creado el {{ trabajo.fecha_creacion|date:"d M Y" }}</strong></span>
+            </div>
+            <div class="fecha-item">
+                <i class="fas fa-user">👤</i>
+                <span><strong>Creador:</strong> {{ trabajo.usuario_creador.get_full_name }}</span>
+            </div>
+        </div>
+
+        <div class="descripcion">
+            <i class="fas fa-pencil-alt"></i>
+            <p><strong>Descripción:</strong> {{ trabajo.descripcion }}</p>
+        </div>
+        
+        <div class="trabajo-info">
+            <div class="info-item">
+                <i class="fas fa-dollar-sign"></i>
+                <p><strong>Presupuesto Mínimo:</strong></p>
+                <span>${{ trabajo.presupuesto_minimo }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-dollar-sign"></i>
+                <p><strong>Presupuesto Máximo:</strong></p>
+                <span>${{ trabajo.presupuesto_maximo }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p><strong>Región:</strong></p>
+                <span>{{ trabajo.region.nombre }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <p><strong>Comuna:</strong></p>
+                <span>{{ trabajo.comuna.nombre }}</span>
+            </div>
+        </div>
+
+        <div class="habilidades-requeridas">
+            <p><strong>Habilidades Requeridas:</strong></p>
+            <ul>
+                {% for habilidad in trabajo.habilidades.all %}
+                    <li>{{ habilidad.nombre }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        {% if not trabajo.is_disponible %}
+            <p class="trabajo-no-disponible" style="color: red;">Este trabajo ya ha sido asignado y no está disponible.</p>
+            {% if trabajo.trabajador_seleccionado %}
+                <p><strong>Trabajador Seleccionado:</strong> {{ trabajo.trabajador_seleccionado.get_full_name }}</p>
+            {% endif %}
+        {% else %}
+            {% if trabajo_postulado %}
+                <span class="btn postulado-btn">Ya postulaste</span>
+            {% else %}
+                <a href="{% url 'postular_trabajo' trabajo.id %}" class="btn postular-btn">Postular</a>
+            {% endif %}
+        {% endif %}
+        
+        <a href="{% url 'trabajos' %}" class="btn volver-btn">Volver a la lista de trabajos</a>
+    </div>
+{% endblock %}

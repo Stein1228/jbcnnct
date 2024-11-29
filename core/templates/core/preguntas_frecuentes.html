@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'core/css/preguntas_frecuentes.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'core/js/preguntas_frecuentes.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<section class="faq-section">
+    <h1>Preguntas Frecuentes</h1>
+    <div class="faq-container">
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Cómo puedo registrarme en la plataforma?</h2>
+            <div class="faq-answer">
+                <p>Puedes crear una cuenta haciendo yendo a la sección de ingreso, luego ingresando a “registrar” y rellenar con los datos solicitados, para más información dirigirse a soporte para poder solucionar su problemática.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Cómo puedo publicar una oferta laboral?</h2>
+            <div class="faq-answer">
+                <p>Accede a tu cuenta, ingresa a “mis trabajos” y selecciona el botón azul “+”. Completa los detalles del trabajo, tales como la descripción, requisitos y ubicación. Luego revisa y confirma la publicación.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Cómo busco trabajos que se adapten a mis necesidades y/o comodidades?</h2>
+            <div class="faq-answer">
+                <p>Usa la barra de búsqueda en la sección “trabajos” y utiliza los filtros adecuados a tu búsqueda, ya sea como la ubicación, el tipo de trabajo o simplemente el nombre del trabajo que buscas. El algoritmo optimizado mostrará las ofertas más relevantes según tus preferencias.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Cómo funciona el sistema de calificaciones y reseñas?</h2>
+            <div class="faq-answer">
+                <p>Después de completar un trabajo, ambas partes (empleador y trabajador) pueden calificar y dejar una reseña sobre su experiencia. Esto ayuda a construir confianza dentro de la comunidad y ayudar a un sistema de gamificación que premiara el prestar un buen servicio, yac sea como “trabajador” o “empleador”.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Qué hago si tengo problemas con otro usuario?</h2>
+            <div class="faq-answer">
+                <p>Si el usuario presento un problema al momento de realizar el trabajo o prestar el servicio por cualquier motivo, ocupe la opción "Reseña" disponible en el perfil de la persona. Nuestro equipo revisará el caso y tomará las medidas necesarias según nuestras políticas.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Qué hago si tengo problemas con otro usuario y no puedo usar el sistema de reseña para registrar?</h2>
+            <div class="faq-answer">
+                <p>Si el usuario presento un problema, pero no es capaz de dejar en las reseñas, podrás contactarte con el correo de soporte de JobConnect contacto@jobconnect.com y explicar y dar en detalle cual o cuales son los problemas.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Puedo negociar el precio de un trabajo publicado?</h2>
+            <div class="faq-answer">
+                <p>Sí, la plataforma incluye un sistema de regateo. Puedes proponer un nuevo precio y negociar directamente con la otra parte hasta llegar a un acuerdo.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Cómo protegen mis datos personales?</h2>
+            <div class="faq-answer">
+                <p>La plataforma cumple con las leyes de protección de datos vigentes. Solo compartimos la información necesaria para realizar conexiones laborales y nunca divulgamos tus datos sin tu consentimiento.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿¿Cómo puedo destacar mi perfil para recibir más ofertas?</h2>
+            <div class="faq-answer">
+                <p>Completa tu perfil con toda la información relevante, como habilidades, experiencia laboral y una foto profesional. Solicita calificaciones positivas después de completar trabajos para mejorar tu visibilidad.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h2 class="faq-question" onclick="toggleFaq(this)">¿Cuánto cuesta usar la plataforma?</h2>
+            <div class="faq-answer">
+                <p>La mayoría de las funciones básicas son gratuitas. Sin embargo, ofrecemos suscripciones premium que incluyen beneficios adicionales, como mayor visibilidad en búsquedas o acceso prioritario a nuevas ofertas laborales.</p>
+            </div>
+        </div>
+        <!-- Añadir más preguntas frecuentes aquí -->
+    </div>
+</section>
+{% endblock %}

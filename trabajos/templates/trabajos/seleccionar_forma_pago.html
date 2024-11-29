@@ -1,0 +1,92 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/pago.css' %}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <!-- Título Principal -->
+        <h2 class="text-center page-title">Seleccionar Forma de Pago</h2>
+
+        <!-- Información del trabajo seleccionado -->
+        <div class="job-info">
+            <h3 class="job-title">Trabajo Seleccionado</h3>
+            <p><strong>Título del trabajo:</strong> <span class="highlight">{{ trabajo.titulo }}</span></p>
+            <p><strong>Trabajador seleccionado:</strong> <span class="highlight">{{ trabajo.trabajador_seleccionado.get_full_name }}</span></p>
+        </div>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if trabajo.forma_pago %}
+            <!-- Si ya se ha seleccionado una forma de pago -->
+            <div class="alert alert-info text-center">
+                <strong>Ya seleccionaste una forma de pago: </strong>{{ trabajo.forma_pago|capfirst }}
+            </div>
+        {% else %}
+            <!-- Si aún no se ha seleccionado una forma de pago -->
+            <form method="post" class="payment-form">
+                {% csrf_token %}
+                
+                <div class="payment-options">
+                    <div class="payment-option" id="efectivo" data-payment="efectivo" aria-label="Seleccionar pago en efectivo">
+                        <i class="fa fa-money-bill-wave payment-icon"></i>
+                        <p>Efectivo</p>
+                    </div>
+                    <div class="payment-option" id="transferencia" data-payment="transferencia" aria-label="Seleccionar transferencia bancaria">
+                        <i class="fa fa-bank payment-icon"></i>
+                        <p>Transferencia Bancaria</p>
+                    </div>
+                    <div class="payment-option" id="debito_credito" data-payment="debito_credito" aria-label="Seleccionar débito / crédito">
+                        <i class="fa fa-credit-card payment-icon"></i>
+                        <p>Débito / Crédito</p>
+                    </div>
+                </div>
+
+                <input type="hidden" name="forma_pago" id="selected-payment" value="">
+
+                <div class="form-group">
+                    <label for="pago_final">Monto Final a Pagar</label>
+                    <input type="number" name="pago_final" id="pago_final" placeholder="ejemplo: $100.0000" class="form-control" min="0" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-block" disabled>Confirmar Forma de Pago <i class="fa fa-check"></i></button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const selectedPaymentInput = document.getElementById('selected-payment');
+        const submitButton = document.querySelector('form button');
+
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                // Limpiar selección previa
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+
+                // Marcar la opción seleccionada
+                option.classList.add('selected');
+                selectedPaymentInput.value = option.dataset.payment;
+
+                // Habilitar el botón de confirmación
+                submitButton.disabled = false;
+            });
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,235 @@
+/* FORMULARIO PRINCIPAL */
+.form-container {
+    max-width: 700px; /* Reducir aún más el max-width */
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px; /* Menos padding en pantallas pequeñas */
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    box-sizing: border-box; /* Asegura que el padding no sobresalga */
+}
+
+/* TÍTULO */
+.form-title {
+    text-align: center;
+    font-size: 2vw; /* Tamaño relativo al ancho de la ventana */
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 10px;
+}
+
+/* COLUMNAS */
+.form-columns {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 1 1 calc(50% - 20px);
+}
+
+.column .form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* ENTRADAS DEL FORMULARIO */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no sobresalga */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #4CAF50;
+    outline: none;
+}
+
+/* SECCIÓN DE HABILIDADES */
+.filter-section {
+    margin-top: 30px;
+}
+
+.habilidades h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.checkbox-group label {
+    font-size: 14px;
+    padding: 8px 15px;
+    background-color: #f1f1f1;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+}
+
+.checkbox-group label:hover {
+    background-color: #4CAF50;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* BOTONES */
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.submit-button:focus {
+    outline: none;
+}
+
+.btn-cancel {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    font-weight: bold;
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #d32f2f;
+}
+
+.btn-cancel:focus {
+    outline: none;
+}
+
+/* MEDIA QUERIES - RESPONSIVIDAD */
+@media screen and (max-width: 768px) {
+    .form-container {
+        max-width: 90%;
+        padding: 20px;
+        margin: 15px;
+    }
+
+    .form-title {
+        font-size: 28px;
+    }
+
+    .form-columns {
+        flex-direction: column;
+    }
+
+    .column {
+        flex: 1 1 100%;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    .checkbox-group label {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .submit-button {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+
+    .btn-cancel {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .filter-section h3 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-title {
+        font-size: 24px;
+    }
+
+    .form-container {
+        max-width: 95%;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .form-columns {
+        flex-direction: column;
+    }
+
+    .column {
+        flex: 1 1 100%;
+    }
+
+    .submit-button {
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+
+    .btn-cancel {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    .filter-section h3 {
+        font-size: 14px;
+    }
+
+    .checkbox-group label {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}

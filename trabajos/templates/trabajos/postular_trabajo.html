@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+
+{% load static %}
+
+{% block title %} Editar trabajo {% endblock %}
+
+{% block  extra_css%}
+    <link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/postular_trabajo.css' %}">
+{% endblock %}
+
+{% block  extra_js%}
+
+{% endblock  %}
+
+{% block content %}
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+            <div class="search-message {% if message.tags == 'success' %}success-message{% elif message.tags == 'info' %}info-message{% endif %}">
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <div class="main-container">
+        <h3 class="titulo-interactivo">Postular a: {{ trabajo.titulo }}</h3>
+
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn-postular">Postular</button>
+            </form>
+        </div>
+
+        <a href="{% url 'trabajos' %}" class="volver-btn">Volver a la lista de trabajos</a>
+    </div>
+{% endblock %}

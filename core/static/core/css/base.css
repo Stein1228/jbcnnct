@@ -1,0 +1,235 @@
+/* Reset de márgenes y padding para todos los elementos */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos generales del cuerpo */
+body {
+    min-height: 100vh;
+    font-family: 'Arial', 'Helvetica', sans-serif; /* Cambia a 'Prompt' según se necesite */
+}
+
+/* Navegación */
+nav {
+    background-color: black;
+    box-shadow: 3px 3px 5px rgba(255, 255, 255, 0.1); /* Sombra sutil para el nav */
+}
+
+nav ul {
+    width: 100%;
+    list-style: none; /* Sin viñetas en la lista */
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos a la derecha */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+nav li {
+    height: 50px; /* Define la altura de los items de la lista */
+}
+
+/* Enlaces dentro del menú de navegación */
+nav a {
+    height: 100%;
+    padding: 0 30px; /* Espaciado horizontal */
+    text-decoration: none; /* Quita el subrayado de los enlaces */
+    display: flex;
+    align-items: center; /* Centra el texto verticalmente */
+    color: white; /* Texto en blanco */
+}
+
+/* Efecto hover en los enlaces del menú */
+nav a:hover {
+    background-color: #444444; /* Fondo gris claro al pasar el mouse */
+}
+
+/* Estilos para el logo o ícono principal del menú */
+.icon {
+    margin-right: auto; /* Alinea el ícono a la izquierda */
+    height: 100%;
+    padding: 0 30px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: 'Prompt', sans-serif; /* Fuente personalizada 'Prompt' */
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Sidebar - menú lateral */
+.sidebar {
+    position: fixed; /* Fija el sidebar en su posición */
+    top: 0; /* Empieza desde arriba */
+    right: 0; /* Alineado a la derecha */
+    height: 100vh; /* Toma toda la altura de la pantalla */
+    width: 250px; /* Ancho del sidebar */
+    z-index: 999; /* Se asegura que el menú esté por encima de otros elementos */
+    background-color: rgba(0, 0, 0, 0.2); /* Fondo negro con transparencia */
+    backdrop-filter: blur(10px); /* Añade un efecto de desenfoque detrás del sidebar */
+    box-shadow: -10px 0 10px rgba(255, 255, 255, 0.1); /* Sombra sutil */
+    display: none; /* Oculto por defecto */
+    flex-direction: column; /* Los elementos se apilan verticalmente */
+    align-items: flex-start; /* Alineación de los items al inicio (izquierda) */
+    justify-content: flex-start; /* Los elementos comienzan desde arriba */
+}
+
+/* Estilos de los items dentro del sidebar */
+.sidebar li {
+    width: 100%; /* Los items ocupan el ancho completo del sidebar */
+}
+
+.sidebar a {
+    width: 100%; /* Los enlaces también ocupan el ancho completo */
+}
+
+/* Botón de menú - inicialmente oculto */
+.menu-button {
+    display: none;
+}
+
+/* Media Query para pantallas pequeñas (max-width: 800px) */
+@media(max-width: 800px) {
+    .hideOnMobile {
+        display: none; /* Oculta elementos cuando la pantalla es pequeña */
+    }
+
+    .menu-button {
+        display: block; /* Muestra el botón del menú en pantallas pequeñas */
+    }
+}
+
+/* Media Query para pantallas más pequeñas (max-width: 400px) */
+@media(max-width: 400px) {
+    .sidebar {
+        width: 100%; /* El sidebar toma todo el ancho en pantallas muy pequeñas */
+    }
+}
+
+/* Footer General */
+footer {
+    background-color: black; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 40px 0; /* Espaciado vertical */
+    font-family: 'Arial', 'Helvetica', sans-serif; /* Fuente general */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between; /* Distribuye el contenido de manera equitativa */
+    max-width: 1200px; /* Limita el ancho máximo */
+    margin: 0 auto; /* Centra el contenido */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en filas cuando sea necesario */
+}
+
+/* Sección del logo del footer */
+.footer-logo {
+    flex: 1;
+    margin: 0 20px; /* Espaciado alrededor */
+}
+
+.footer-logo h2 {
+    font-size: 24px; /* Tamaño de fuente para el logo */
+    font-family: 'Prompt', sans-serif; /* Usa la fuente 'Prompt' */
+    font-weight: bold; /* Negrita */
+}
+
+.footer-logo p {
+    font-size: 14px; /* Tamaño más pequeño para el texto de descripción */
+    margin-top: 10px;
+    color: #aaa; /* Texto gris claro */
+}
+
+/* Enlaces rápidos, contacto y redes sociales en el footer */
+.footer-links, .footer-contact, .footer-social {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.footer-links h3, .footer-contact h3, .footer-social h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer-links ul, .footer-social ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li, .footer-social ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #fff; /* Enlaces en blanco */
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+.footer-contact p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.footer-social ul {
+    display: flex;
+    gap: 15px; /* Espaciado entre los íconos sociales */
+}
+
+.footer-social ul li img {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s ease; /* Suaviza la transición de opacidad */
+}
+
+.footer-social ul li img:hover {
+    opacity: 0.7; /* Disminuye la opacidad al pasar el mouse */
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    background-color: black;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+    color: white; /* Texto blanco */
+}
+
+/* Responsividad del footer para pantallas pequeñas */
+@media (max-width: 800px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center; /* Centra el texto en pantallas pequeñas */
+    }
+
+    .footer-logo, .footer-links, .footer-contact, .footer-social {
+        margin: 20px 0; /* Espaciado entre las secciones */
+    }
+}
+
+/* Scroll to Top Button */
+#scrollTopBtn {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+}
+
+#scrollTopBtn:hover {
+    background-color: #555;
+}

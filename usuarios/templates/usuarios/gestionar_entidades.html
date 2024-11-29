@@ -1,0 +1,113 @@
+<!-- gestionar_entidades.html -->
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}
+  Gestion
+{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'usuarios/css/gestion.css' %}">
+{% endblock %}
+
+{% block content %}
+  <!-- Título principal de la página -->
+  <h2 class="page-title">Gestión de Regiones, Comunas y Habilidades</h2>
+
+  <!-- Formulario para crear una región -->
+  <div class="class-containe-region">
+    <h3 class="section-title">Crear Región</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {{ region_form.as_p }}
+      <button type="submit" name="crear_region">Crear Región</button>
+    </form>
+  
+    <h3 class="section-title">Regiones Existentes</h3>
+    <ul>
+      {% for region in regions %}
+        <li>
+          {{ region.nombre }}
+          <!-- Editar Región -->
+          <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="region_id" value="{{ region.id }}">
+            {{ region_form.as_p }}
+            <button type="submit" name="editar_region">Editar Región</button>
+          </form>
+          <!-- Eliminar Región -->
+          <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="region_id" value="{{ region.id }}">
+            <button type="submit" name="eliminar_region">Eliminar Región</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Formulario para crear una comuna -->
+  <div class="container-comuna">
+    <h3 class="section-title">Crear Comuna</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {{ comuna_form.as_p }}
+      <button type="submit" name="crear_comuna">Crear Comuna</button>
+    </form>
+  
+    <h3 class="section-title">Comunas Existentes</h3>
+    <ul>
+      {% for comuna in comunas %}
+        <li>
+          {{ comuna.nombre }} (Región: {{ comuna.region.nombre }})
+          <!-- Editar Comuna -->
+          <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="comuna_id" value="{{ comuna.id }}">
+            {{ comuna_form.as_p }}
+            <button type="submit" name="editar_comuna">Editar Comuna</button>
+          </form>
+          <!-- Eliminar Comuna -->
+          <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="comuna_id" value="{{ comuna.id }}">
+            <button type="submit" name="eliminar_comuna">Eliminar Comuna</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="container-habilidades">
+    <!-- Formulario para crear una habilidad -->
+    <h3 class="section-title">Crear Habilidad</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {{ habilidad_form.as_p }}
+      <button type="submit" name="crear_habilidad">Crear Habilidad</button>
+    </form>
+
+    <h3 class="section-title">Habilidades Existentes</h3>
+    <ul>
+      {% for habilidad in habilidades %}
+        <li>
+          {{ habilidad.nombre }}
+          <!-- Editar Habilidad -->
+          <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="habilidad_id" value="{{ habilidad.id }}">
+            {{ habilidad_form.as_p }}
+            <button type="submit" name="editar_habilidad">Editar Habilidad</button>
+          </form>
+          <!-- Eliminar Habilidad -->
+          <form method="POST" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="habilidad_id" value="{{ habilidad.id }}">
+            <button type="submit" name="eliminar_habilidad">Eliminar Habilidad</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,198 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %} Editar perfil {% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'usuarios/css/editar_perfil.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" 
+          integrity="sha512-xtV3HfYNbQXS/1R1jP53KbFcU9WXiSA1RFKzl5hRlJgdOJm4OxHCWYpskm6lN0xp0XtKGpAfVShpbvlFH3MDAA==" 
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox.min.js" 
+            integrity="sha512-KbRFbjA5bwNan6DvPl1ODUolvTTZ/vckssnFhka5cG80JVa5zSlRPCr055xSgU/q6oMIGhZWLhcbgIC0fyw3RQ==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js" 
+            integrity="sha512-/IJVg2oav2TggiFftaMSPgttHNmgu/0RSGP64Nm7wqYwjkxj4hAHLRMJi3QNTa22f4pIkvTsCpB848HEilV6MA==" 
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Cargar imagen de perfil
+            var uploadButton = document.getElementById('uploadButton');
+            var fileInput = document.getElementById('id_foto_perfil');
+            var profileImage = document.getElementById('profileImage');
+
+            uploadButton.addEventListener('click', function() {
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        profileImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            });
+
+            // Filtrar comunas según la región seleccionada
+            const regionSelect = document.getElementById('id_region');
+            const comunaSelect = document.getElementById('id_comuna');
+
+            regionSelect.addEventListener('change', function () {
+                const regionId = regionSelect.value;
+
+                if (regionId) {
+                    fetch(`/usuarios/filtrar-comunas/${regionId}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+
+                            data.forEach(comuna => {
+                                const option = document.createElement('option');
+                                option.value = comuna.id;
+                                option.textContent = comuna.nombre;
+                                comunaSelect.appendChild(option);
+                            });
+                        })
+                        .catch(error => console.error('Error fetching comunas:', error));
+                } else {
+                    comunaSelect.innerHTML = '<option value="">Selecciona una comuna</option>';
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title">Editar Perfil</h1>
+    <form method="post" enctype="multipart/form-data" class="edit-profile-form">
+        {% csrf_token %}
+
+        <div class="form-group profile-upload">
+            <div class="profile-image-container">
+                {% if form.foto_perfil.value %}
+                    <a href="{{ user.foto_perfil.url }}" data-lightbox="perfil" data-title="Foto de {{ user.first_name }}">
+                        <img src="{{ user.foto_perfil.url }}" alt="Foto de {{ user.first_name }}" class="profile-image" id="profileImage">
+                    </a>
+                    <div class="button-container">
+                        <input type="file" id="id_foto_perfil" name="foto_perfil" style="display: none;">
+                        <button type="button" class="btn-upload" id="uploadButton">Elegir nueva foto</button>
+                    </div>
+                    <label for="id_foto_perfil_clear" class="remove-photo-label">
+                        <input type="checkbox" id="id_foto_perfil_clear" name="foto_perfil-clear"> 
+                    </label>
+                    <p style="color: red;">Eliminar foto</p>
+                {% else %}
+                    <a href="{% static 'images/foto_perfil_defecto.svg' %}" data-lightbox="perfil" data-title="Foto de perfil por defecto">
+                        <img src="{% static 'images/foto_perfil_defecto.svg' %}" alt="Foto de perfil por defecto" class="profile-image" id="profileImage">
+                    </a>
+                    <div class="button-container">
+                        <input type="file" id="id_foto_perfil" name="foto_perfil" style="display: none;">
+                        <button type="button" class="btn-upload" id="uploadButton">Elegir nueva foto</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="form-columns">
+            <div class="column">
+                <div class="form-group">
+                    <label for="id_email" class="form-label">Correo electrónico:</label>
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_first_name" class="form-label">Nombre:</label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_s_nombre" class="form-label">Segundo nombre:</label>
+                    {{ form.s_nombre }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_last_name" class="form-label">Apellido:</label>
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_s_apellido" class="form-label">Segundo apellido:</label>
+                    {{ form.s_apellido }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_numero_telefono" class="form-label">Número de teléfono:</label>
+                    {{ form.numero_telefono }}
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="form-group">
+                    <label for="id_genero" class="form-label">Género:</label>
+                    {{ form.genero }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_region" class="form-label">Región:</label>
+                    {{ form.region }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_comuna" class="form-label">Comuna:</label>
+                    {{ form.comuna }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_bio" class="form-label">Biografía:</label>
+                    {{ form.bio }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_instagram" class="form-label">Instagram:</label>
+                    {{ form.instagram }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_facebook" class="form-label">Facebook:</label>
+                    {{ form.facebook }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_habilidades" class="form-label">Habilidades:</label>
+                    <div class="habilidades-container">
+                        {% for habilidad in form.habilidades %}
+                            <div class="habilidad-item">
+                                {{ habilidad }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="submit-button">Guardar cambios</button>
+        </div>
+        <a href="{% url 'perfil' %}" class="btn-cancel">Cancelar</a>
+    </form>
+
+    {% if form.errors %}
+        <div class="error-container">
+            <strong class="error-title">Errores:</strong>
+            <ul class="error-list">
+                {% for field, errors in form.errors.items %}
+                    <li class="error-item">{{ field }}: {{ errors|join:", " }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

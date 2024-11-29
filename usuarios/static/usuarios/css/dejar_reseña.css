@@ -1,0 +1,110 @@
+.review-container {
+    max-width: 600px; /* Ancho máximo del contenedor */
+    width: 90%; /* Ancho adaptativo */
+    background: #F7F7F7; /* Color de fondo */
+    padding: 2rem; /* Espaciado interno */
+    margin: auto; /* Centrar el contenedor */
+    margin-top: 20px; /* Margen superior */
+    margin-bottom: 20px; /* Margen inferior */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #e0e0e0; /* Borde sutil */
+}
+
+.review-title {
+    text-align: center; /* Título centrado */
+    margin-bottom: 20px; /* Espacio inferior */
+    font-size: 24px; /* Tamaño de fuente mayor */
+    color: #333; /* Color del texto */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espacio entre grupos de formulario */
+}
+
+.rating {
+    direction: rtl; /* Permite que las estrellas se seleccionen de derecha a izquierda */
+    display: flex; /* Alineación flexible */
+}
+
+.rating input {
+    display: none; /* Oculta los inputs de radio */
+}
+
+.rating label {
+    font-size: 2em; /* Tamaño de la estrella */
+    color: #ccc; /* Color por defecto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre las estrellas */
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f39c12; /* Color al pasar el mouse */
+}
+
+.rating input:checked ~ label {
+    color: #f39c12; /* Color para estrellas seleccionadas */
+}
+
+label {
+    display: block; /* Asegurarse de que las etiquetas ocupen todo el ancho */
+    margin-bottom: 5px; /* Espacio entre etiqueta y campo */
+    font-weight: bold; /* Etiquetas en negrita */
+}
+
+input[type="text"], input[type="file"], select, textarea {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espacio interno */
+    border: 1px solid #ccc; /* Borde suave */
+    border-radius: 5px; /* Bordes redondeados */
+    box-sizing: border-box; /* Para incluir padding y borde en el ancho */
+    transition: border-color 0.3s; /* Transición suave para el borde */
+}
+
+input[type="text"]:focus, input[type="file"]:focus, select:focus, textarea:focus {
+    border-color: #007bff; /* Cambiar color de borde al enfocar */
+    outline: none; /* Sin contorno */
+}
+
+.file-input {
+    display: block; /* Hacer que el input de archivo ocupe el 100% */
+}
+
+.submit-button {
+    display: block; /* Botón ocupa todo el ancho */
+    width: 100%; /* Ancho completo */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: transparent; /* Sin fondo */
+    color: black; /* Color del texto */
+    border: 2px solid #000000; /* Borde negro */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
+    text-decoration: none; /* Quitar subrayado en el enlace */
+}
+
+.submit-button:hover {
+    background-color: #000000; /* Fondo negro al pasar el ratón */
+    color: white; /* Cambiar color del texto */
+}
+
+.btn-cancel {
+    display: inline-block; /* Botón en línea */
+    margin-top: 10px; /* Margen superior */
+    color: #777; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+    text-decoration: none; /* Sin subrayado */
+    width: 100%; /* Ancho completo */
+}
+
+.btn-cancel:hover {
+    text-decoration: underline; /* Subrayar al pasar el mouse */
+}
+
+.error {
+    color: #dc3545; /* Color de error */
+    margin-top: 10px; /* Espacio superior */
+    font-weight: bold; /* Texto en negrita */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+}

@@ -1,0 +1,178 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    Mis Trabajos
+{% endblock %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'trabajos/css/ver_trabajos.css' %}">
+    <!-- Cargar Font Awesome para los íconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    <a href="{% url 'crear_trabajo' %}" class="floating-btn">
+        <span class="btn-icon">+</span>
+    </a>
+    <div class="container-main">
+        <h2 class="Titulo">Mis Trabajos</h2>
+        
+        <!-- Mostrar mensajes de Django -->
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        <i class="fas fa-exclamation-circle"></i> <!-- Ícono de exclamación -->
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {% if trabajos %}
+        <ul>
+            {% for trabajo in trabajos %}
+                <div class="carta">
+                    <!-- Cabecera de la carta -->
+                    <div class="carta-header">
+                        <h2 class="titulo">{{ trabajo.titulo }}</h2>
+                        {% if trabajo.is_completado %}
+                            <span class="completado-label">Completado</span>
+                        {% endif %}
+                        <div class="info-header">
+                            <div class="info-item fecha">
+                                <span class="icon">📅</span>
+                                <strong>{{ trabajo.fecha_creacion }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Cuerpo de la carta -->
+                    <div class="carta-body">
+                        <div class="descripcion-container">
+                            <p><strong>Descripción:</strong> {{ trabajo.descripcion }}</p>
+                        </div>
+                        
+                        <div class="nuevos-datos">
+                            {% load l10n %}
+                            <div class="dato">
+                                <strong>Presupuesto Mínimo:</strong>
+                                <p>${{ trabajo.presupuesto_minimo |localize }}</p>
+                            </div>
+                            <div class="dato">
+                                <strong>Presupuesto Máximo:</strong>
+                                <p>${{ trabajo.presupuesto_maximo|localize  }}</p>
+                            </div>
+                            <div class="dato">
+                                <strong>Comuna:</strong>
+                                <p>{{ trabajo.comuna }}</p>
+                            </div>
+                            <div class="dato">
+                                <strong>Región:</strong>
+                                <p>{{ trabajo.region }}</p>
+                            </div>
+                        </div>
+                
+                        {% if trabajo.habilidades.all %}
+                            <p><strong>Habilidades Requeridas:</strong></p>
+                            <div class="habilidades-container">
+                                {% for habilidad in trabajo.habilidades.all %}
+                                    <span class="habilidad">{{ habilidad.nombre }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p><strong>Habilidades Requeridas:</strong> No se han especificado habilidades.</p>
+                        {% endif %}
+                    </div>
+                
+                    <!-- Línea de separación -->
+                    <hr class="linea-separadora">
+                
+                    <!-- Botones de acción -->
+                    <div class="acciones">
+                        {% if trabajo.is_completado and trabajo.trabajador_seleccionado %}
+                            <!-- Si el trabajo está completado, muestra solo el botón "Ver Resumen" -->
+                            <a href="{% url 'match' trabajo.id %}" class="btn resumen-btn">Ver Resumen</a>
+                        {% else %}
+                            {% if trabajo.trabajador_seleccionado %}
+                                <!-- Si hay un trabajador seleccionado, muestra "Ver Resumen" -->
+                                <a href="{% url 'match' trabajo.id %}" class="btn resumen-btn">Ver Resumen</a>
+                            {% else %}
+                                <!-- Si no hay trabajador seleccionado, muestra "Ver Postulaciones" -->
+                                <a href="{% url 'ver_postulaciones' trabajo.id %}" class="btn filtro-btn">Ver Postulaciones</a>
+                                <a href="{% url 'editar_trabajo' trabajo.id %}" class="btn filtro-btn">Editar</a>
+                                <button class="openModalBtn" data-trabajo-id="{{ trabajo.id }}">Eliminar Trabajo</button>
+                            {% endif %}
+                    
+                            
+                    
+                            <!-- Modal -->
+                            <div class="modal" style="display: none;">
+                                <div class="modal-content">
+                                    <span class="close-btn">&times;</span>
+                                    <h1>Eliminar Trabajo</h1>
+                                    <p>¿Estás seguro de que deseas eliminar "{{ trabajo.titulo }}"?</p>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="trabajo_id" value="{{ trabajo.id }}">
+                                        <button type="submit" class="confirm-btn">Confirmar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <li>No has creado ningún trabajo aún.</li>
+            {% endfor %}
+        </ul>
+        <div class="filtro-completado">
+            <a href="?completado={{ completado_opuesto|yesno:'True,False' }}" class="btn filtro-btn">
+                {% if completado %}
+                    Ver trabajos no completados
+                {% else %}
+                    Ver trabajos completados
+                {% endif %}
+            </a>
+        </div>
+        {% else %}
+            <div class="message {{ message.tags }}">
+                <i class="fas fa-exclamation-circle"></i> <!-- Ícono de exclamación -->
+                No tienes trabajos creados.
+            </div>
+        {% endif %}
+    </div>
+   
+    <script>
+        // Obtener todos los botones de abrir modal
+        const modalBtns = document.querySelectorAll('.openModalBtn');
+        
+        modalBtns.forEach(btn => {
+            btn.onclick = function() {
+                const modal = btn.nextElementSibling; // Selecciona el siguiente modal
+                modal.style.display = "block"; // Muestra el modal
+            }
+        });
+    
+        // Obtener los botones de cerrar y añadir el evento
+        const closeBtns = document.querySelectorAll('.close-btn');
+        closeBtns.forEach(closeBtn => {
+            closeBtn.onclick = function() {
+                const modal = closeBtn.closest('.modal');
+                modal.style.display = "none"; // Cierra el modal
+            }
+        });
+    
+        // Cerrar el modal si se hace clic fuera del contenido del modal
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = "none"; // Cierra el modal
+                }
+            });
+        }
+        
+    </script>
+{% endblock %}
+
+
