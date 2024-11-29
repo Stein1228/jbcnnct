@@ -1,0 +1,150 @@
+h1, h2, h3 {
+    margin: 0;
+}
+
+/* Clase para el h2 con clase .page-title */
+.page-title {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Clase para el h3 con clase .section-title */
+.section-title {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los contenedores de cada sección */
+.class-containe-region, .container-comuna, .container-habilidades {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3.section-title {
+    font-size: 1.6em;
+    margin-bottom: 10px;
+    color: #0056b3;
+}
+
+/* Formularios */
+form {
+    margin-bottom: 20px;
+}
+
+form input[type="text"], form input[type="number"], form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+/* Inputs de edición */
+input[type="text"].edit-input, input[type="number"].edit-input, select.edit-input {
+    background-color: #fafafa;
+    border-color: #ccc;
+}
+
+input[type="text"].edit-input:focus, input[type="number"].edit-input:focus, select.edit-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botones */
+form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Listas de elementos (Regiones, Comunas, Habilidades) */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li button {
+    margin-left: 10px;
+    background-color: #dc3545;
+}
+
+ul li button:hover {
+    background-color: #c82333;
+}
+
+/* Mejoras para dispositivos pequeños (Responsive Design) */
+@media (max-width: 768px) {
+/* Aseguramos que los contenedores ocupen el 95% del ancho en pantallas pequeñas */
+    .class-containe-region, .container-comuna, .container-habilidades {
+        width: 95%;
+    }
+
+    /* Ajustamos los encabezados para dispositivos pequeños */
+    .page-title {
+        font-size: 1.5em;
+    }
+
+    .section-title {
+        font-size: 1.4em;
+    }
+
+    /* Ajustamos los formularios para que no se desborden */
+    form input[type="text"], form input[type="number"], form select, form textarea {
+        font-size: 0.9em;
+        width: 100%;
+    }
+
+    /* Aseguramos que los botones se alineen correctamente */
+    form button {
+        font-size: 0.9em;
+        width: 100%; /* Botones ocupan el 100% del ancho en pantallas pequeñas */
+        padding: 12px; /* Mayor padding para facilitar el clic */
+    }
+
+    /* Mejoramos la visualización de las listas */
+    ul li {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    ul li button {
+        width: 100%; /* Hacemos que los botones de eliminar o editar ocupen todo el ancho */
+        margin-top: 10px;
+    }
+}
+
+
+
+  

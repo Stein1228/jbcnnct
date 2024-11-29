@@ -1,0 +1,149 @@
+/* General */
+.about-us {
+    padding: 40px 20px;
+    background-color: #f8f9fc;
+    color: #333;
+}
+
+.about-us h1 {
+    text-align: center;
+    font-family: 'Prompt', sans-serif;
+    font-size: 28px;
+    color: #004aad;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Videos Grid */
+.videos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.video-container {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 15px;
+}
+
+.video-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 250px;
+    border: none;
+    margin-bottom: 10px;
+}
+
+/* Centrando los títulos */
+.video-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #004aad;
+    font-family: 'Arial', sans-serif;
+    text-align: center; /* Asegura que el texto esté centrado */
+    margin-top: 0; /* Elimina márgenes extra hacia arriba */
+}
+
+/* Descripción */
+.video-description {
+    font-size: 14px;
+    color: #555;
+    margin: 10px 15px 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.4;
+}
+
+/* Section Containers */
+.section-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fc;
+    color: #333;
+    text-align: justify;
+}
+
+/* Contenedores de secciones: Misión, Visión, Valores */
+.mission-section {
+    background-color: #000000; /* Fondo oscuro para la misión */
+    color: #ffffff; /* Texto blanco para la misión */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vision-section {
+    background-color: #004aad; /* Fondo azul para la visión */
+    color: #ffffff; /* Texto blanco para la visión */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.values-section {
+    background-color: #5ce1e6; /* Fondo azul celeste para los valores */
+    color: #000000; /* Texto oscuro para los valores */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtítulos de cada sección con color blanco para Misión y Visión */
+.mission-section h3, .vision-section h3 {
+    color: white; /* Blanco para "Nuestra Misión" y "Visión" */
+}
+
+/* Subtítulos de "Valores" con color gris oscuro */
+.values-section h3 {
+    color: #333; /* Gris oscuro para "Valores" */
+}
+
+/* Párrafos y listas con color blanco para Misión y Visión */
+.mission-section p, .vision-section p {
+    color: white; /* Blanco para los textos de "Nuestra Misión" y "Visión" */
+}
+
+/* Párrafos y listas con color gris oscuro para "Valores" */
+.values-section p, .values-section li {
+    color: #333; /* Gris oscuro para los textos de "Valores" */
+}
+
+/* Para asegurar que el color del texto dentro de cada sección esté bien aplicado */
+.mission-section, .vision-section {
+    color: white; /* Asegura que todo el texto dentro de estas secciones sea blanco */
+}
+
+.values-section {
+    color: #333; /* Asegura que el texto en "Valores" sea gris oscuro */
+}
+
+
+/* Lista de valores */
+.section-container ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.section-container li {
+    margin-bottom: 8px;
+}

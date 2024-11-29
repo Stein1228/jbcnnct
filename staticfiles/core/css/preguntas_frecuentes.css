@@ -1,0 +1,47 @@
+.faq-section {
+    max-width: 1200px; /* Ancho máximo para la sección de preguntas frecuentes */
+    margin: 20px auto; /* Centra la sección */
+    padding: 20px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo claro */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.faq-section h1 {
+    text-align: center; /* Centra el título */
+    font-family: 'Prompt', sans-serif; /* Fuente personalizada */
+    font-size: 28px; /* Tamaño de fuente del título */
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+.faq-container {
+    display: flex; /* Flexbox para el contenedor de preguntas */
+    flex-direction: column; /* Apilar preguntas verticalmente */
+}
+
+.faq-item {
+    margin-bottom: 15px; /* Espaciado entre preguntas */
+    border: 1px solid #5a5a5a; /* Borde sutil */
+    border-radius: 5px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta el desbordamiento */
+}
+
+.faq-question {
+    cursor: pointer; /* Cambia el cursor al pasar sobre la pregunta */
+    padding: 15px; /* Espaciado interno para la pregunta */
+    background-color: #ffffff; /* Color de fondo para la pregunta */
+    color: #000000;
+    font-weight: bold; /* Negrita */
+}
+
+.faq-answer {
+    display: none; /* Oculta la respuesta por defecto */
+    padding: 15px; /* Espaciado interno para la respuesta */
+    background-color: #fff; /* Color de fondo blanco */
+}
+
+/* Estilo para el hover de la pregunta */
+.faq-question:hover {
+    background-color: #000000; /* Cambia el fondo al pasar el ratón */
+    color: #ffffff;
+}

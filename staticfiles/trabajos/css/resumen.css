@@ -1,0 +1,93 @@
+/* Estilo específico para el contenedor de resumen del trabajo */
+.resumen-trabajo-container {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+}
+
+/* Título principal */
+.resumen-trabajo-container h1 {
+    text-align: center;
+    color: #4a90e2;
+}
+
+/* Contenedor de detalles del trabajo (ancho completo) */
+.resumen-trabajo-container .trabajo-detalles {
+    width: 100%;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor para empleador y trabajador en dos columnas */
+.resumen-trabajo-container .detalles-container {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+/* Cada columna ocupa 50% del ancho del contenedor */
+.resumen-trabajo-container .columna {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Opcional: Estilo de imagen para un tamaño uniforme */
+.resumen-trabajo-container .profile-image {
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para cada párrafo y títulos */
+.resumen-trabajo-container p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+.resumen-trabajo-container h2 {
+    text-align: center;
+    color: #333;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+/* Botones */
+.resumen-trabajo-container .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.resumen-trabajo-container .btn-primary {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+}
+
+.resumen-trabajo-container .btn-secondary {
+    background-color: #777;
+    color: #fff;
+    border: none;
+}
+
+.resumen-trabajo-container .btn:hover {
+    opacity: 0.85;
+    transition: opacity 0.2s ease-in-out;
+}

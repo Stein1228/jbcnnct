@@ -1,0 +1,482 @@
+/* Contenedor principal del perfil */
+.container {
+    width: 80%;
+    background: #F7F7F7;
+    padding: 2rem;
+    margin: 20px auto; /* Combinado en una sola línea */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* Título centrado */
+.titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #000000;
+}
+
+/* Estilos generales para el formulario */
+.filter-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.search-bar input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 20px;
+    background-color: #F7F7F7;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Estilo del botón de filtro */
+.search-bar .filter-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.search-bar .filter-toggle:hover {
+    background: none;
+}
+
+.search-bar .filter-toggle img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Sección de habilidades */
+.filter-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 5px;
+}
+
+.filter-section-rango{
+    display: flex;
+    flex-direction: column; /* Apila los elementos verticalmente */
+    align-items: center; /* Centra horizontalmente los elementos */
+    margin-bottom: 20px; /* Espaciado inferior entre secciones */
+}
+
+.filter-section-rango label,
+.filter-section-rango input,
+.filter-section-rango output {
+    margin-bottom: 10px; /* Espacio entre los elementos */
+
+}
+
+.filter-section-rango input[type="range"] {
+    width: 100%; /* Asegura que el rango ocupe todo el ancho disponible */
+    max-width: 300px; /* Ajusta el ancho máximo si es necesario */
+}
+
+.filter-section.habilidades {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+}
+
+.filter-section.habilidades h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Grupo de checkboxes */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #555;
+    font-weight: bold;
+    flex: 1 1 calc(18% - 10px);
+    margin-bottom: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Opciones de filtro */
+.filter-options {
+    display: none;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.filter-options.active {
+    display: block;
+}
+
+.filter-options select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Acciones del formulario */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    background-color: #F7F7F7;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Estilos generales para la lista de usuarios */
+.user-list {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.user-list ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.user-list-item:hover {
+    transform: translateY(-5px);
+}
+
+/* Encabezado de la tarjeta */
+.user-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-image {
+    border-radius: 50%;
+    margin-right: 15px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-details strong {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.user-rating {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Biografía del usuario */
+.user-bio {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: justify;
+    white-space: normal; /* Permite que el texto haga saltos de línea */
+    overflow-wrap: break-word; /* Asegura que las palabras largas se dividan en varias líneas si es necesario */
+    word-break: break-word; /* Rompe las palabras largas si no hay espacio suficiente */
+}
+
+/* Enlace del perfil */
+.view-profile {
+    color: #000000;
+    border: 2px solid #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 15px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-top: auto;
+}
+
+.view-profile:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* Responsive Design: Ajustar el número de columnas */
+@media (max-width: 1200px) {
+    .user-list ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .user-list ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .user-list ul {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Contenedor de paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.step-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Estilos para enlaces de paginación */
+.pagination a {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #000000;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Estilo para la página actual */
+.current {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    padding: 8px 12px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Estilo cuando no hay páginas anteriores o siguientes */
+.pagination a[disabled],
+.pagination a.disabled {
+    pointer-events: none;
+    background-color: #e9ecef;
+    color: #6c757d;
+}
+
+
+/* Mensaje de éxito (cuando se encuentran usuarios) */
+.success-message {
+    color: #28a745; /* Verde */
+    border-left: 5px solid #28a745;
+    padding: 10px;
+    background-color: #e7f7e7; /* Fondo verde claro */
+    animation: fadeIn 0.5s ease-in-out; /* Añadimos animación de entrada */
+}
+
+/* Mensaje de error (cuando no se encuentran usuarios) */
+.error-message {
+    color: #dc3545; /* Rojo */
+    border-left: 5px solid #dc3545;
+    padding: 10px;
+    background-color: #f8d7da; /* Fondo rojo claro */
+    animation: fadeIn 0.5s ease-in-out; /* Añadimos animación de entrada */
+}
+
+/* Animación para que el mensaje aparezca suavemente */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.search-message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px; /* Bordes redondeados */
+    display: block;
+    transition: opacity 1s ease-out;
+}
+
+.success-message {
+    color: #28a745; /* Verde */
+    border-left: 5px solid #28a745;
+    padding: 10px;
+    background-color: #e7f7e7; /* Fondo verde claro */
+    animation: fadeIn 0.5s ease-in-out; /* Añadimos animación de entrada */
+    border: 2px solid #218838; /* Borde verde oscuro */
+}
+
+.error-message {
+    color: #dc3545; /* Rojo */
+    border-left: 5px solid #dc3545;
+    padding: 10px;
+    background-color: #f8d7da; /* Fondo rojo claro */
+    animation: fadeIn 0.5s ease-in-out; /* Añadimos animación de entrada */
+    border: 2px solid #c82333; /* Borde rojo oscuro */
+}
+
+/* Añadir el estilo para ocultar */
+.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.btn {
+    padding: 12px 25px;
+    background-color: #007bff; /* Azul estándar */
+    border: 2px solid #000000;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+}
+
+.btn:hover {
+    background-color: #000000;
+    transform: translateY(-3px);
+}
+
+
+/* Estilo contenedor de los mensajes */
+.messages {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centra los mensajes */
+}
+
+/* Estilo base para todos los mensajes */
+.alert {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 600px; /* Ancho máximo para los mensajes */
+    display: flex;
+    align-items: center; /* Centra el texto verticalmente */
+    box-sizing: border-box;
+    color: #fff; /* Texto blanco */
+}
+
+/* Estilo para mensajes de éxito */
+.alert-success {
+    background-color: #28a745; /* Verde de éxito */
+    border: 1px solid #218838; /* Borde ligeramente más oscuro */
+}
+
+/* Estilo para los iconos dentro del mensaje */
+.alert .icon {
+    margin-right: 15px;
+    font-size: 20px; /* Tamaño del ícono */
+}
+
+/* Estilo para los mensajes de error */
+.alert-danger {
+    background-color: #dc3545; /* Rojo de error */
+    border: 1px solid #c82333; /* Borde rojo oscuro */
+}
+
+/* Añadir efectos cuando el mensaje está visible */
+.alert {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Animación para el mensaje de éxito */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

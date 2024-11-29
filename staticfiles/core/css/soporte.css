@@ -1,0 +1,174 @@
+/* Sección "principal" */
+
+/* Contenedor principal */
+.support-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 34px;
+    font-family: 'Lato', sans-serif; /* Fuente Lato para el texto general */
+    color: #000; /* Color negro para el texto */
+    font-size: 12px;
+}
+
+/* Efecto para el título principal */
+.titulo-soporte {
+    text-align: center;
+    font-family: 'Prompt', sans-serif;
+    color: #2596be;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 2.8em;
+    animation: fadeInDown 1.5s ease-out; /* Animación inicial */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subrayado animado */
+.titulo-soporte::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #2596be;
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    animation: underlineSlide 2s ease-out forwards;
+}
+
+/* Estilos para el área de soporte */
+.soporte-container {
+    background-color: #f3e5f5; /* Fondo lila claro */
+    color: #000; /* Texto negro */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.soporte-container a {
+    color: #2596be; /* Color azul para los enlaces */
+    text-decoration: none;
+    font-weight: bold; /* Enlaces en negrita */
+    transition: color 0.3s ease; /* Suaviza la transición al pasar el mouse */
+}
+
+.soporte-container a:hover {
+    color: #7b2cbf; /* Cambia a un tono celeste al pasar el ratón */
+}
+
+.soporte-container p {
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+/* Estilos de la sección de soporte */
+.support-container h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #2596be; /* Color azul para los títulos */
+    margin-bottom: 20px;
+}
+
+.support-section {
+    margin-bottom: 30px;
+}
+
+/* Efecto en los subtítulos de secciones */
+.support-section h2 {
+    font-size: 1.8em;
+    color: #2596be;
+    border-bottom: 2px solid transparent; /* Borde invisible inicialmente */
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease; /* Transición de color */
+}
+
+.support-section h2:hover {
+    border-color: #7b2cbf; /* Cambio de color en el borde al pasar el mouse */
+    color: #7b2cbf; /* Cambia el texto a lila */
+}
+
+/* Animación de subtítulos */
+.support-content h3 {
+    font-size: 1.6em;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 15px;
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideInLeft 1.2s ease-out forwards;
+}
+
+/* Keyframes para las animaciones */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes underlineSlide {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 0;
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.support-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.support-content ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.support-content ul li {
+    padding: 5px 0;
+    border-left: 3px solid #2596be; /* Borde azul para las listas */
+    padding-left: 10px;
+    margin: 8px 0;
+}
+
+/* Estilo de enlaces para acciones específicas */
+.support-content a {
+    color: #2596be; /* Color azul para los enlaces */
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.support-content a:hover {
+    color: #0b4d99; /* Cambio a un tono celeste cuando el mouse pasa sobre el enlace */
+    text-decoration: underline;
+}
+
+/* Ajustes responsivos para tamaños más pequeños */
+@media (max-width: 768px) {
+    .titulo-soporte {
+        font-size: 2em;
+    }
+    
+    .soporte-container {
+        padding: 20px;
+    }
+}

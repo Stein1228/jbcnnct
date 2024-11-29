@@ -1,0 +1,118 @@
+.carta {
+    background-color: #f9f9f9; /* Color de fondo de la carta */
+    border: 1px solid #ddd; /* Borde de la carta */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    margin: 20px; /* Margen externo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra de la carta */
+    font-family: Arial, sans-serif; /* Tipo de letra */
+}
+
+h1 {
+    color: #333; /* Color del título */
+}
+
+.postulacion-item {
+    background-color: #fff; /* Color de fondo de cada postulante */
+    border: 1px solid #ccc; /* Borde de cada postulante */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno más generoso */
+    margin: 15px 0; /* Márgenes más amplios entre postulaciones */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaciado entre los diferentes elementos */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.postulacion-item strong {
+    font-weight: bold;
+    color: #333; /* Mejor visibilidad del texto */
+}
+
+.postulacion-item a {
+    text-decoration: none;
+    transition: all 0.3s ease; /* Transición suave */
+}
+
+.view-profile,
+.seleccionar-trabajador {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    width: auto;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 10px; /* Espaciado entre los botones */
+    margin-top: 10px;
+}
+
+.view-profile:hover,
+.seleccionar-trabajador:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Efecto de elevación */
+}
+
+.view-profile {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+.view-profile:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.postulacion-item .botones {
+    display: flex; /* Usamos flexbox para alinear los botones en fila */
+    gap: 12px; /* Espaciado entre los botones */
+    justify-content: flex-start; /* Alineación a la izquierda */
+    margin-top: 10px; /* Espacio superior */
+}
+
+.postulacion-item .botones a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* Tamaño uniforme para los botones */
+}
+
+.postulacion-item .botones a + a {
+    margin-left: 10px; /* Espaciado entre los botones */
+}
+
+/* Botón para "Volver a la lista de trabajos" */
+.volver-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.volver-btn:hover {
+    background-color: #0056b3;
+}
+/* Enlace del perfil */
+.view-profile {
+    color: #000000;
+    border: 2px solid #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px 15px;
+    transition: background-color 0.3s ease;
+    margin-top: auto;
+}
+
+.view-profile:hover {
+    background-color: #000000;
+    color: #ffffff;
+}

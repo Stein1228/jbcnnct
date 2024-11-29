@@ -1,0 +1,329 @@
+/* Contenedor principal del perfil */
+.profile-container {
+    max-width: 800px;         /* Ancho máximo del contenedor */
+    width: 90%;               /* Ancho del contenedor en pantallas más pequeñas */
+    background: #F7F7F7;     /* Color de fondo */
+    padding: 2rem;           /* Espaciado interno */
+    margin: auto;            /* Centrar el contenedor */
+    margin-top: 20px;        /* Margen superior */
+    margin-bottom: 20px;     /* Margen inferior */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border-radius: 5px;      /* Bordes redondeados */
+}
+
+/* Estilo responsivo para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 15px;        /* Reduce el padding en pantallas pequeñas */
+    }
+}
+
+/* Estilo responsivo para pantallas más grandes */
+@media (min-width: 1200px) {
+    .profile-container {
+        max-width: 1200px;    /* Aumenta el ancho máximo */
+        padding: 20px;        /* Mantiene el padding */
+        border-radius: 10px;  /* Mayor radio de bordes */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+    }
+}
+
+/* Botón "Editar Perfil" */
+.profile-edit-container {
+    text-align: right;       /* Alinear el contenido a la derecha */
+    margin-bottom: 20px;     /* Margen inferior */
+}
+
+.profile-edit {
+    background-color: transparent; /* Sin fondo */
+    color: black;                  /* Texto negro */
+    border: 2px solid #000000;     /* Borde negro */
+    padding: 10px 15px;            /* Espaciado interno */
+    border-radius: 5px;            /* Bordes redondeados */
+    cursor: pointer;                /* Cambia el cursor al pasar por encima */
+    font-size: 16px;               /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
+    margin-left: 10px;             /* Espacio entre botones */
+    text-decoration: none;          /* Quitar subrayado en el enlace */
+}
+
+.profile-edit:hover {
+    background-color: #000000;     /* Fondo negro al pasar el ratón */
+    color: white;                  /* Texto blanco al pasar el ratón */
+}
+
+/* Encabezado del perfil */
+.profile-header {
+    display: flex;                 /* Usar flexbox para disposición */
+    justify-content: space-between; /* Espacio entre elementos */
+    align-items: center;           /* Centra verticalmente */
+    margin-bottom: 20px;           /* Margen inferior */
+}
+
+.profile-name {
+    text-align: right;            /* Alinear nombre a la derecha */
+}
+
+.profile-image {
+    width: 150px;                 /* Ancho de la imagen */
+    height: 150px;                /* Alto de la imagen */
+    border-radius: 50%;           /* Imagen circular */
+    overflow: hidden;             /* Oculta parte sobrante de la imagen */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
+    display: flex;                /* Centrar el contenido */
+    justify-content: center;      /* Centrar horizontalmente */
+    align-items: center;          /* Centrar verticalmente */
+    background-color: #ffffff;    /* Color de fondo */
+}
+
+.profile-image img {
+    width: 100%;                  /* Imagen ocupa todo el contenedor */
+    height: auto;                 /* Mantiene la relación de aspecto */
+    object-fit: cover;            /* Cubre sin distorsionar */
+}
+
+/* Lista de información del perfil */
+.profile-info-list {
+    list-style: none;             /* Sin estilo de lista */
+    padding: 0;                   /* Sin padding */
+    margin: 10px 0;              /* Margen */
+    text-align: right;            /* Alinear texto a la derecha */
+}
+
+.profile-info-list li {
+    width: 100%;                  /* Ancho completo */
+    text-align: right;            /* Alinear texto a la derecha */
+}
+
+/* Biografía */
+.bio {
+    width: 100%;                  /* Ancho completo */
+    word-wrap: break-word;       /* Permite que las palabras se dividan */
+    margin: 0;                   /* Sin margen */
+    text-align: justify;          /* Alineación justificada */
+    overflow-wrap: break-word;    /* Rompe palabras largas */
+    white-space: pre-wrap;        /* Mantiene espacios en blanco y saltos de línea */
+}
+
+/* Sección del perfil */
+.profile-section {
+    margin-top: 20px;            /* Margen superior */
+}
+
+.profile-section h2 {
+    font-size: 1.5rem;            /* Tamaño de fuente mayor */
+    color: #000000;               /* Color de texto */
+    margin-bottom: 10px;          /* Margen inferior */
+    text-align: left;             /* Alinear a la izquierda */
+    border-bottom: 2px solid #000000; /* Línea inferior */
+    padding-bottom: 5px;          /* Espacio interno inferior */
+    text-transform: capitalize;    /* Capitaliza palabras */
+}
+
+/* Elemento del perfil */
+.profile-item {
+    margin-bottom: 20px;         /* Margen inferior */
+}
+
+.profile-label {
+    font-size: 1rem;              /* Tamaño de fuente normal */
+    color: #555555;               /* Color gris oscuro */
+    margin-bottom: 5px;           /* Margen inferior */
+    display: block;               /* Asegura que ocupe ancho completo */
+    font-weight: bold;            /* Negrita */
+    text-transform: uppercase;    /* Texto en mayúsculas */
+    letter-spacing: 0.5px;        /* Espaciado entre letras */
+}
+
+.profile-content {
+    font-size: 1rem;              /* Tamaño de fuente estándar */
+    color: #444444;               /* Color gris oscuro */
+    line-height: 1.6;             /* Altura de línea */
+    margin-bottom: 20px;          /* Margen inferior */
+    background-color: #f9f9f9;    /* Fondo claro */
+    border-radius: 8px;           /* Bordes redondeados */
+    padding: 15px;                /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.profile-content p {
+    margin-bottom: 10px;          /* Margen inferior entre párrafos */
+}
+
+/* Mensajes de aviso para información no registrada */
+.no-address-message,
+.no-social-message,
+.no-habilidades-message {
+    color: #666;                  /* Color gris */
+    font-style: italic;           /* Estilo cursiva */
+}
+
+/* Diseño de rejilla para datos personales */
+.profile-grid {
+    display: grid;                /* Usar grid layout */
+    grid-template-columns: 1fr 1fr; /* Dos columnas */
+    gap: 20px;                   /* Espacio entre columnas */
+}
+
+/* Contenedor para Género y Nacionalidad en horizontal */
+.gender-nationality {
+    display: flex;                /* Usar flexbox */
+    gap: 20px;                   /* Espacio entre elementos */
+}
+
+.horizontal-items {
+    margin-bottom: 10px;          /* Margen inferior */
+}
+
+/* Ajustes generales para los elementos de perfil */
+.profile-item {
+    margin-bottom: 10px;          /* Margen inferior */
+    flex: 1;                      /* Igualar ancho de los elementos */
+}
+
+/* Sección de Reseñas */
+.container-resenas {
+    margin: 20px;                 /* Margen alrededor de la sección */
+}
+
+.container-resenas h2 {
+    border-top: 2px solid #000000; /* Línea superior */
+    padding-top: 10px;           /* Espacio interno superior */
+    margin-bottom: 20px;          /* Margen inferior */
+    font-size: 24px;              /* Tamaño de fuente */
+    color: #000000;               /* Color de texto */
+}
+
+/* Tarjeta de Reseña */
+.review-card {
+    border: 1px solid #ddd;       /* Borde claro */
+    border-radius: 8px;           /* Bordes redondeados */
+    padding: 15px;                /* Espaciado interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #ffffff;     /* Fondo blanco */
+}
+
+.review-header {
+    display: flex;                /* Usar flexbox */
+    justify-content: space-between; /* Espacio entre elementos */
+    margin-bottom: 10px;         /* Margen inferior */
+}
+
+.review-username {
+    font-weight: bold;            /* Negrita */
+    font-size: 1.2rem;           /* Tamaño de fuente mayor */
+    color: #333;                 /* Color oscuro */
+    margin-bottom: 5px;          /* Margen inferior */
+}
+
+.review-date {
+    font-size: 0.9rem;            /* Tamaño de fuente pequeño */
+    color: #6c757d;               /* Color gris suave */
+    margin-bottom: 5px;           /* Margen inferior */
+    font-style: italic;           /* Cursiva */
+}
+
+.review-nota {
+    font-size: 1rem;              /* Tamaño de fuente normal */
+    font-weight: bold;            /* Negrita */
+    color: #333333;               /* Color oscuro */
+    margin-left: 5px;             /* Espacio a la izquierda */
+}
+
+/* Ejemplo para estrellas (opcional) */
+.review-nota .star {
+    color: #333333;               /* Color de estrellas */
+    font-size: 1.2rem;            /* Tamaño de estrellas */
+}
+
+.review-comment {
+    font-size: 1rem;              /* Tamaño de fuente normal */
+    color: #333333;               /* Color oscuro */
+    line-height: 1.5;             /* Espaciado entre líneas */
+    margin-top: 10px;             /* Margen superior */
+    padding: 10px;                /* Espaciado interno */
+    border-left: 4px solid #000000; /* Borde izquierdo */
+    background-color: #F7F7F7;    /* Fondo claro */
+    border-radius: 5px;           /* Bordes redondeados */
+    word-wrap: break-word;        /* Ajuste de texto */
+    overflow-wrap: break-word;    /* Asegura que se rompa el texto largo */
+    max-width: 100%;              /* Limitar ancho del comentario */
+}
+
+.imagen-reseña {
+    width: auto;                  /* Ancho automático */
+    height: 150px;               /* Altura fija para mantener proporción */
+    object-fit: cover;            /* Cubre el área y recorta si es necesario */
+    margin: 5px;                 /* Margen */
+    border-radius: 8px;          /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+.btn {
+    padding: 12px 25px;
+    background-color: #007bff; /* Azul estándar */
+    border: 2px solid #000000;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+
+}
+
+.btn:hover {
+    background-color: #000000;
+    transform: translateY(-3px);
+}
+
+/* Contenedor de mensajes */
+.messages-container {
+    margin: 20px auto;  /* Centrado horizontal, con márgenes en la parte superior e inferior */
+    padding: 10px;
+    max-width: 500px;   /* Ancho máximo para que el contenedor no sea demasiado grande */
+    width: 90%;         /* Ancho relativo para que se ajuste bien a diferentes tamaños de pantalla */
+    box-sizing: border-box;
+}
+
+/* Estilo base para todos los mensajes */
+.message {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    border: 1px solid transparent;  /* Borde aplicado dependiendo del tipo de mensaje */
+    box-sizing: border-box;
+}
+
+/* Estilo específico para mensaje de éxito */
+.message.success {
+    background-color: #d4edda;  /* Verde claro de fondo */
+    color: #155724;  /* Texto verde oscuro */
+    border: 1px solid #c3e6cb;  /* Borde verde más suave */
+}
+
+/* Estilo para el ícono dentro del mensaje */
+.message i {
+    margin-right: 10px;  /* Espaciado entre el ícono y el texto */
+    font-size: 20px;  /* Tamaño del ícono */
+    color: #155724;  /* Color del ícono (verde oscuro) */
+}
+
+/* Animación de desvanecimiento */
+.message.success {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Animación de desvanecimiento */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+

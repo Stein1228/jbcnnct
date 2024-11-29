@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-d=c3m++#@fa#cj%fws%m$@qr8g1yc3w*1m)tnyttsf!c3(46uv
 # ADVERTENCIA DE SEGURIDAD: no ejecutes con debug activado en producción.
 DEBUG = True  # Cambiar a False en producción
 
-ALLOWED_HOSTS = []  # Hosts que están permitidos para servir esta aplicación, deben especificarse en producción.
+ALLOWED_HOSTS = ['*']  # Hosts que están permitidos para servir esta aplicación, deben especificarse en producción.
 
 # Definición de aplicaciones
 INSTALLED_APPS = [
@@ -22,7 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Aplicaciones personalizadas
     'core',  # Aplicación principal
     'usuarios',  # Aplicación de gestión de usuarios
@@ -99,7 +99,8 @@ STATIC_URL = 'static/'  # URL para los archivos estáticos
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-
+# Directorio donde se recopilarán los archivos estáticos (por ejemplo, para producción)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Archivos multimedia (imágenes, videos subidos por los usuarios)
 MEDIA_URL = '/media/'  # URL para servir archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Directorio donde se almacenarán los archivos subidos

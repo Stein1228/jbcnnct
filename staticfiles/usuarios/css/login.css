@@ -1,0 +1,194 @@
+.formulario {
+    position: relative;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+    background: #F7F7F7;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.formulario h1{
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 3px solid black;
+}
+
+.formulario form{
+    padding: 0 20px;
+}
+
+form .username{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.username input{
+    background-color: #ffffff;
+    width: calc(100% - 10px); /* Ajusta el ancho para evitar el desbordamiento */
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: 1px solid #adadad;
+    outline: none;
+    transition: border-color 0.3s ease; 
+}
+
+.username label{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+/* Diseños para darle movimiento a los input y label*/
+.username span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: black;
+    transition: .5s;
+}
+
+.username input:focus ~ label,
+.username input:not(:placeholder-shown) + label{
+    top: -5px;
+    color: black;
+    transform: translateY(-12px);
+}
+
+.username input:focus ~ span::before,
+.username input:focus ~ span::before{
+    width: 100%;
+}
+/* Diseños para darle movimiento a los input y label*/
+
+.olvidar{
+    margin: -5px 0 20px 5px;
+    color: black; 
+    cursor: pointer;
+}
+
+.olvidar:hover{
+    text-decoration: underline;
+}
+
+/* Estilo del botón de "Ingresar" */
+input[type="submit"] {
+    width: 100%;                   /* Ocupa el 100% del ancho disponible */
+    height: 50px;                  /* Altura del botón */
+    border: 2px solid #000000;      /* Borde sólido negro */
+    background-color: #F7F7F7;      /* Fondo gris claro igual al div */
+    font-size: 16px;                /* Tamaño de fuente */
+    font-weight: bold;  
+    color: black;                   /* Texto en negro */
+    cursor: pointer;                /* Cambia el cursor al pasar por encima */
+    outline: none;                  /* Elimina el borde de enfoque predeterminado */
+    margin-top: 10px;               /* Espaciado superior */
+    border-radius: 25px;            /* Botón redondeado */
+    transition: background-color 0.5s ease, color 0.5s ease; /* Efecto de transición */
+    
+}
+
+input[type="submit"]:hover {
+    background-color: black;        /* Fondo negro al pasar el cursor */
+    color: white;                   /* Texto blanco en hover */
+    border-color: #000000;          /* Borde negro */
+    transition: .5s;                /* Suaviza la transición */
+}
+
+/* Estilo del contenedor de "Registrarse" */
+.registrarse {
+    text-align: center;         /* Centrar el texto y el enlace */
+    margin-top: 20px;
+}
+
+.registrarse p {
+    font-size: 14px;
+    color: #555;                /* Color gris suave para el texto */
+    margin-bottom: 20px;        /* Mayor separación debajo del texto */
+}
+
+/* Estilo del enlace de "Registrarse" */
+.registrarse a {
+    font-size: 16px;
+    color: black;               /* Texto negro */
+    text-decoration: none;       /* Elimina el subrayado */
+    font-weight: bold;           /* Texto en negrita */
+    padding: 8px 15px;           /* Espaciado alrededor del enlace */
+    border-radius: 25px;         /* Bordes redondeados */
+    border: 2px solid black;     /* Borde negro */
+    transition: all 0.3s ease;   /* Transición suave */
+}
+
+.registrarse a:hover {
+    background-color: black;     /* Fondo negro en hover */
+    color: white;                /* Texto blanco en hover */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .formulario {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .formulario h1 {
+        font-size: 1.5rem;
+    }
+
+    .formulario form {
+        padding: 0 20px;
+    }
+
+    .username input {
+        height: 35px;
+    }
+
+    input[type="submit"] {
+        height: 45px;
+        font-size: 16px;
+    }
+}
+
+/* Estilo para el contenedor de los mensajes de error */
+.alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Estilo específico para los errores */
+.alert-danger {
+    background-color: #f8d7da; /* Fondo rojo suave */
+    color: #721c24; /* Color de texto rojo oscuro */
+    border: 1px solid #f5c6cb; /* Borde rojo más claro */
+}
+
+.alert-danger p {
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Opcional: Si quieres hacer que el mensaje sea más destacado, puedes agregar un ícono */
+.alert-danger::before {
+    content: "⚠️ "; /* Puedes usar cualquier ícono de tu preferencia */
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/* Añadir un poco de espacio entre los mensajes de error */
+.alert-danger + .alert-danger {
+    margin-top: 15px;
+}
