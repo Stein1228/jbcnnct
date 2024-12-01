@@ -5,7 +5,7 @@
     right: 20px; /* Distancia desde la derecha */
     width: 60px; /* Ancho del botón */
     height: 60px; /* Alto del botón */
-    background-color: blue; /* Color de fondo */
+    background-color: rgb(89, 89, 231); /* Color de fondo */
     color: white; /* Color del texto */
     border-radius: 50%; /* Hace el botón circular */
     display: flex; /* Usa flexbox para centrar el contenido */
