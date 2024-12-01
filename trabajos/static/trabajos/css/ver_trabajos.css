@@ -394,3 +394,39 @@
     margin-right: 10px; /* Espacio entre el ícono y el texto */
     font-size: 20px; /* Tamaño del ícono */
 }
+
+/* Estilos generales para el filtro */
+.filtro-completado {
+    margin-top: 30px;  /* Agrega espacio desde el contenido superior */
+    display: flex;
+    justify-content: center;  /* Centra el contenido horizontalmente */
+}
+
+/* Estilos del botón de filtro */
+.filtro-btn {
+    padding: 10px 20px;
+    background-color: #007bff;  /* Azul para el botón */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+    display: inline-block;  /* Asegura que el botón no se expanda demasiado */
+}
+
+.filtro-btn:hover {
+    background-color: #0056b3;  /* Azul oscuro al pasar el ratón */
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .filtro-completado {
+        margin-top: 20px;  /* Menos espacio en pantallas pequeñas */
+    }
+
+    .filtro-btn {
+        padding: 8px 16px;  /* Reducir tamaño del botón en pantallas pequeñas */
+        font-size: 14px;  /* Reducir tamaño de texto */
+    }
+}

@@ -1,329 +1,432 @@
-/* Contenedor principal del perfil */
-.profile-container {
-    max-width: 800px;         /* Ancho máximo del contenedor */
-    width: 90%;               /* Ancho del contenedor en pantallas más pequeñas */
-    background: #F7F7F7;     /* Color de fondo */
-    padding: 2rem;           /* Espaciado interno */
-    margin: auto;            /* Centrar el contenedor */
-    margin-top: 20px;        /* Margen superior */
-    margin-bottom: 20px;     /* Margen inferior */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    border-radius: 5px;      /* Bordes redondeados */
+/* no mover */
+.floating-btn {
+    position: fixed; /* Fija la posición */
+    top: 80px; /* Distancia desde la parte superior */
+    right: 20px; /* Distancia desde la derecha */
+    width: 60px; /* Ancho del botón */
+    height: 60px; /* Alto del botón */
+    background-color: blue; /* Color de fondo */
+    color: white; /* Color del texto */
+    border-radius: 50%; /* Hace el botón circular */
+    display: flex; /* Usa flexbox para centrar el contenido */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 24px; /* Tamaño del símbolo */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el botón */
+    transition: background-color 0.3s; /* Transición suave para el color */
 }
 
-/* Estilo responsivo para pantallas más pequeñas */
-@media (max-width: 768px) {
-    .profile-container {
-        padding: 15px;        /* Reduce el padding en pantallas pequeñas */
-    }
+.floating-btn:hover .btn-text {
+    display: block; /* Muestra el texto al pasar el mouse */
+    opacity: 1; /* Asegúrate de que sea visible */
 }
 
-/* Estilo responsivo para pantallas más grandes */
-@media (min-width: 1200px) {
-    .profile-container {
-        max-width: 1200px;    /* Aumenta el ancho máximo */
-        padding: 20px;        /* Mantiene el padding */
-        border-radius: 10px;  /* Mayor radio de bordes */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
-    }
+.container-main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Botón "Editar Perfil" */
-.profile-edit-container {
-    text-align: right;       /* Alinear el contenido a la derecha */
-    margin-bottom: 20px;     /* Margen inferior */
+.container-main:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+/*Tiutlo*/
+.Titulo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
 }
 
-.profile-edit {
-    background-color: transparent; /* Sin fondo */
-    color: black;                  /* Texto negro */
-    border: 2px solid #000000;     /* Borde negro */
-    padding: 10px 15px;            /* Espaciado interno */
-    border-radius: 5px;            /* Bordes redondeados */
-    cursor: pointer;                /* Cambia el cursor al pasar por encima */
-    font-size: 16px;               /* Tamaño de fuente */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
-    margin-left: 10px;             /* Espacio entre botones */
-    text-decoration: none;          /* Quitar subrayado en el enlace */
+.Titulo {
+    padding: 8px 15px;
+    background-color: #70561989;  /* Color azul */
+    color: white;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+/* Estilo de las Cartas de Trabajo */
+.carta {
+    background-color: #fff;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
-.profile-edit:hover {
-    background-color: #000000;     /* Fondo negro al pasar el ratón */
-    color: white;                  /* Texto blanco al pasar el ratón */
+.carta:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Encabezado del perfil */
-.profile-header {
-    display: flex;                 /* Usar flexbox para disposición */
-    justify-content: space-between; /* Espacio entre elementos */
-    align-items: center;           /* Centra verticalmente */
-    margin-bottom: 20px;           /* Margen inferior */
+/* Cabecera de la Carta */
+.carta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.profile-name {
-    text-align: right;            /* Alinear nombre a la derecha */
+.carta-header .titulo {
+    font-size: 24px;
+    color: #333;
+    font-weight: 600;
+    margin: 0;
+}
+/* Mejoras en Creador y Fecha */
+.info-header {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
 }
 
-.profile-image {
-    width: 150px;                 /* Ancho de la imagen */
-    height: 150px;                /* Alto de la imagen */
-    border-radius: 50%;           /* Imagen circular */
-    overflow: hidden;             /* Oculta parte sobrante de la imagen */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para profundidad */
-    display: flex;                /* Centrar el contenido */
-    justify-content: center;      /* Centrar horizontalmente */
-    align-items: center;          /* Centrar verticalmente */
-    background-color: #ffffff;    /* Color de fondo */
+.info-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
 }
 
-.profile-image img {
-    width: 100%;                  /* Imagen ocupa todo el contenedor */
-    height: auto;                 /* Mantiene la relación de aspecto */
-    object-fit: cover;            /* Cubre sin distorsionar */
+.creador-fecha {
+    display: flex;
+    gap: 10px;
 }
 
-/* Lista de información del perfil */
-.profile-info-list {
-    list-style: none;             /* Sin estilo de lista */
-    padding: 0;                   /* Sin padding */
-    margin: 10px 0;              /* Margen */
-    text-align: right;            /* Alinear texto a la derecha */
+.creador-fecha-item {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-.profile-info-list li {
-    width: 100%;                  /* Ancho completo */
-    text-align: right;            /* Alinear texto a la derecha */
+.creador-fecha-item:hover {
+    transform: translateY(-5px);
+    color: black;
+    cursor: pointer;
 }
 
-/* Biografía */
-.bio {
-    width: 100%;                  /* Ancho completo */
-    word-wrap: break-word;       /* Permite que las palabras se dividan */
-    margin: 0;                   /* Sin margen */
-    text-align: justify;          /* Alineación justificada */
-    overflow-wrap: break-word;    /* Rompe palabras largas */
-    white-space: pre-wrap;        /* Mantiene espacios en blanco y saltos de línea */
+/* Cuerpo de la Carta */
+.carta-body {
+    margin-bottom: 20px;
 }
 
-/* Sección del perfil */
-.profile-section {
-    margin-top: 20px;            /* Margen superior */
+.carta-body p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+/* Nuevos Datos (Presupuesto, Comuna, Región) */
+.nuevos-datos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
 }
 
-.profile-section h2 {
-    font-size: 1.5rem;            /* Tamaño de fuente mayor */
-    color: #000000;               /* Color de texto */
-    margin-bottom: 10px;          /* Margen inferior */
-    text-align: left;             /* Alinear a la izquierda */
-    border-bottom: 2px solid #000000; /* Línea inferior */
-    padding-bottom: 5px;          /* Espacio interno inferior */
-    text-transform: capitalize;    /* Capitaliza palabras */
+.dato {
+    background-color: #f8f9fa; /* Fondo suave */
+    padding: 12px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    color: #495057; /* Color suave para el texto */
 }
 
-/* Elemento del perfil */
-.profile-item {
-    margin-bottom: 20px;         /* Margen inferior */
+.dato strong {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 5px;
 }
 
-.profile-label {
-    font-size: 1rem;              /* Tamaño de fuente normal */
-    color: #555555;               /* Color gris oscuro */
-    margin-bottom: 5px;           /* Margen inferior */
-    display: block;               /* Asegura que ocupe ancho completo */
-    font-weight: bold;            /* Negrita */
-    text-transform: uppercase;    /* Texto en mayúsculas */
-    letter-spacing: 0.5px;        /* Espaciado entre letras */
+.dato p {
+    font-size: 14px;
+    color: #6c757d;
 }
 
-.profile-content {
-    font-size: 1rem;              /* Tamaño de fuente estándar */
-    color: #444444;               /* Color gris oscuro */
-    line-height: 1.6;             /* Altura de línea */
-    margin-bottom: 20px;          /* Margen inferior */
-    background-color: #f9f9f9;    /* Fondo claro */
-    border-radius: 8px;           /* Bordes redondeados */
-    padding: 15px;                /* Espaciado interno */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+/* Habilidades Requeridas */
+.habilidades-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
 }
 
-.profile-content p {
-    margin-bottom: 10px;          /* Margen inferior entre párrafos */
+.habilidad {
+    padding: 8px 15px;
+    background-color: #70561989;  /* Color azul */
+    color: white;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Mensajes de aviso para información no registrada */
-.no-address-message,
-.no-social-message,
-.no-habilidades-message {
-    color: #666;                  /* Color gris */
-    font-style: italic;           /* Estilo cursiva */
+.habilidad:hover {
+    background-color: #d388e5;  /* Cambio de color al pasar el mouse */
+    transform: translateY(-3px);
 }
-
-/* Diseño de rejilla para datos personales */
-.profile-grid {
-    display: grid;                /* Usar grid layout */
-    grid-template-columns: 1fr 1fr; /* Dos columnas */
-    gap: 20px;                   /* Espacio entre columnas */
-}
-
-/* Contenedor para Género y Nacionalidad en horizontal */
-.gender-nationality {
-    display: flex;                /* Usar flexbox */
-    gap: 20px;                   /* Espacio entre elementos */
-}
-
-.horizontal-items {
-    margin-bottom: 10px;          /* Margen inferior */
-}
-
-/* Ajustes generales para los elementos de perfil */
-.profile-item {
-    margin-bottom: 10px;          /* Margen inferior */
-    flex: 1;                      /* Igualar ancho de los elementos */
-}
-
-/* Sección de Reseñas */
-.container-resenas {
-    margin: 20px;                 /* Margen alrededor de la sección */
-}
-
-.container-resenas h2 {
-    border-top: 2px solid #000000; /* Línea superior */
-    padding-top: 10px;           /* Espacio interno superior */
-    margin-bottom: 20px;          /* Margen inferior */
-    font-size: 24px;              /* Tamaño de fuente */
-    color: #000000;               /* Color de texto */
-}
-
-/* Tarjeta de Reseña */
-.review-card {
-    border: 1px solid #ddd;       /* Borde claro */
-    border-radius: 8px;           /* Bordes redondeados */
-    padding: 15px;                /* Espaciado interno */
+/* Estilos para la descripción */
+.descripcion-container {
+    display: flex;
+    align-items: flex-start;
+    background-color: #f4f7fa; /* Fondo suave */
+    border-left: 5px solid #007bff; /* Línea azul en el lado izquierdo */
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    background-color: #ffffff;     /* Fondo blanco */
+    font-size: 16px;
+    color: #555;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.review-header {
-    display: flex;                /* Usar flexbox */
-    justify-content: space-between; /* Espacio entre elementos */
-    margin-bottom: 10px;         /* Margen inferior */
+.descripcion-container:hover {
+    background-color: #e9ecef; /* Fondo más claro al pasar el ratón */
+    transform: translateY(-5px); /* Efecto de elevación */
 }
 
-.review-username {
-    font-weight: bold;            /* Negrita */
-    font-size: 1.2rem;           /* Tamaño de fuente mayor */
-    color: #333;                 /* Color oscuro */
-    margin-bottom: 5px;          /* Margen inferior */
+.descripcion-icon {
+    font-size: 20px;
+    color: #007bff;
+    margin-right: 10px; /* Espacio entre el icono y el texto */
 }
 
-.review-date {
-    font-size: 0.9rem;            /* Tamaño de fuente pequeño */
-    color: #6c757d;               /* Color gris suave */
-    margin-bottom: 5px;           /* Margen inferior */
-    font-style: italic;           /* Cursiva */
+.descripcion-container p {
+    margin: 0;
+    line-height: 1.6;
 }
 
-.review-nota {
-    font-size: 1rem;              /* Tamaño de fuente normal */
-    font-weight: bold;            /* Negrita */
-    color: #333333;               /* Color oscuro */
-    margin-left: 5px;             /* Espacio a la izquierda */
+.descripcion-container strong {
+    font-weight: 600;
+    color: #333;
+}
+/* Línea de separación */
+
+.linea-separadora {
+    border: 0;
+    border-top: 2px solid #eee;
+    margin: 20px 0;
 }
 
-/* Ejemplo para estrellas (opcional) */
-.review-nota .star {
-    color: #333333;               /* Color de estrellas */
-    font-size: 1.2rem;            /* Tamaño de estrellas */
+/* Botones de acción */
+.acciones {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 20px;
 }
 
-.review-comment {
-    font-size: 1rem;              /* Tamaño de fuente normal */
-    color: #333333;               /* Color oscuro */
-    line-height: 1.5;             /* Espaciado entre líneas */
-    margin-top: 10px;             /* Margen superior */
-    padding: 10px;                /* Espaciado interno */
-    border-left: 4px solid #000000; /* Borde izquierdo */
-    background-color: #F7F7F7;    /* Fondo claro */
-    border-radius: 5px;           /* Bordes redondeados */
-    word-wrap: break-word;        /* Ajuste de texto */
-    overflow-wrap: break-word;    /* Asegura que se rompa el texto largo */
-    max-width: 100%;              /* Limitar ancho del comentario */
-}
-
-.imagen-reseña {
-    width: auto;                  /* Ancho automático */
-    height: 150px;               /* Altura fija para mantener proporción */
-    object-fit: cover;            /* Cubre el área y recorta si es necesario */
-    margin: 5px;                 /* Margen */
-    border-radius: 8px;          /* Bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
 .btn {
     padding: 12px 25px;
     background-color: #007bff; /* Azul estándar */
-    border: 2px solid #000000;
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
     font-size: 16px;
     transition: background-color 0.3s ease, transform 0.3s ease;
-
 }
 
 .btn:hover {
-    background-color: #000000;
+    background-color: #343a40; /* Cambia a negro */
     transform: translateY(-3px);
 }
 
-/* Contenedor de mensajes */
-.messages-container {
-    margin: 20px auto;  /* Centrado horizontal, con márgenes en la parte superior e inferior */
-    padding: 10px;
-    max-width: 500px;   /* Ancho máximo para que el contenedor no sea demasiado grande */
-    width: 90%;         /* Ancho relativo para que se ajuste bien a diferentes tamaños de pantalla */
-    box-sizing: border-box;
+.postular-btn {
+    background-color: #28a745;
 }
 
-/* Estilo base para todos los mensajes */
-.message {
+.postular-btn:hover {
+    background-color: #218838;
+}
+
+.editar-btn {
+    background-color: #ffc107;
+}
+
+.editar-btn:hover {
+    background-color: #e0a800;
+}
+
+.info-header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+}
+
+.info-header p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilita el scroll si es necesario */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro y semi-transparente */
+}
+/*MODAL*/
+.modal-content {
+    background-color: #fefefe; /* Color de fondo del contenido */
+    margin: 15% auto; /* Margen superior e inferior */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Borde del contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    width: 300px; /* Ancho del contenido */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra del contenido */
+    text-align: center; /* Centrar texto */
+}
+
+.close-btn {
+    color: #aaa; /* Color del botón de cerrar */
+    float: right; /* Alinear a la derecha */
+    font-size: 28px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Color al pasar el mouse */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+.confirm-btn {
+    background-color: #e74c3c; /* Color de fondo del botón de confirmación */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición suave para el color */
+}
+
+.confirm-btn:hover {
+    background-color: #c0392b; /* Color más oscuro al pasar el mouse */
+}
+
+.cancel-btn {
+    display: inline-block; /* Para que el enlace se comporte como un botón */
+    margin-top: 10px; /* Espaciado superior */
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #3498db; /* Color de fondo del botón de cancelar */
+    color: white; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave para el color */
+}
+
+.cancel-btn:hover {
+    background-color: #2980b9; /* Color más oscuro al pasar el mouse */
+}
+
+.openModalBtn{
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #ff0000;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+/*mensaje de error*/
+.messages-container {
+    margin: 20px 0;
+}
+.message {
     padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    border: 1px solid transparent;  /* Borde aplicado dependiendo del tipo de mensaje */
-    box-sizing: border-box;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    text-align: center;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    align-items: center; /* Para alinear el ícono con el texto */
 }
 
-/* Estilo específico para mensaje de éxito */
 .message.success {
-    background-color: #d4edda;  /* Verde claro de fondo */
-    color: #155724;  /* Texto verde oscuro */
-    border: 1px solid #c3e6cb;  /* Borde verde más suave */
+    background-color: #05f030;
+    color: white;
 }
 
-/* Estilo para el ícono dentro del mensaje */
+.message.error {
+    background-color: #fb051a;
+    color: white;
+}
+
+.message.warning {
+    background-color: #ea0505;
+    color: black;
+}
+
+.message.info {
+    background-color: #17a2b8;
+    color: white;
+}
+
 .message i {
-    margin-right: 10px;  /* Espaciado entre el ícono y el texto */
-    font-size: 20px;  /* Tamaño del ícono */
-    color: #155724;  /* Color del ícono (verde oscuro) */
+    margin-right: 10px; /* Espacio entre el ícono y el texto */
+    font-size: 20px; /* Tamaño del ícono */
 }
 
-/* Animación de desvanecimiento */
-.message.success {
-    animation: fadeIn 0.5s ease-in-out;
+/* Estilos generales para el filtro */
+.filtro-completado {
+    margin-top: 30px;  /* Agrega espacio desde el contenido superior */
+    display: flex;
+    justify-content: center;  /* Centra el contenido horizontalmente */
 }
 
-/* Animación de desvanecimiento */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+/* Estilos del botón de filtro */
+.filtro-btn {
+    padding: 10px 20px;
+    background-color: #007bff;  /* Azul para el botón */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+    display: inline-block;  /* Asegura que el botón no se expanda demasiado */
+}
+
+.filtro-btn:hover {
+    background-color: #0056b3;  /* Azul oscuro al pasar el ratón */
+}
+
+/* Responsividad para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .filtro-completado {
+        margin-top: 20px;  /* Menos espacio en pantallas pequeñas */
     }
-    to {
-        opacity: 1;
+
+    .filtro-btn {
+        padding: 8px 16px;  /* Reducir tamaño del botón en pantallas pequeñas */
+        font-size: 14px;  /* Reducir tamaño de texto */
     }
 }
-

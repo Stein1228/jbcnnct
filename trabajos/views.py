@@ -102,10 +102,10 @@ def crear_trabajo(request):
 
                         ¡Buenas noticias! Se ha publicado un nuevo trabajo que creemos que puede ser de tu interés. Este trabajo coincide con las habilidades que has demostrado en nuestra plataforma y creemos que podrías ser una excelente opción para este proyecto.
 
-                        El trabajo titulado "<strong>{trabajo.titulo}</strong>" está ahora disponible, y podrías ser el candidato ideal para llevarlo a cabo. Te invitamos a revisar los detalles y postularte si estás interesado. Aquí tienes la información clave sobre el trabajo:
+                        El trabajo titulado "{trabajo.titulo}" está ahora disponible, y podrías ser el candidato ideal para llevarlo a cabo. Te invitamos a revisar los detalles y postularte si estás interesado. Aquí tienes la información clave sobre el trabajo:
 
-                        - <strong>Título del trabajo:</strong> {trabajo.titulo}
-                        - <strong>Ubicación:</strong> {trabajo.comuna}, {trabajo.region}
+                        - Título del trabajo: {trabajo.titulo}
+                        - Ubicación: {trabajo.comuna}, {trabajo.region}
 
                         Para obtener más detalles sobre este trabajo y postularte, simplemente haz clic en el siguiente enlace:  
                         {trabajo_url}
@@ -177,7 +177,7 @@ def postular_trabajo(request, trabajo_id):
 
             El usuario {postulante.get_full_name()} ha postulado al trabajo: {trabajo.titulo}.\n
             Puedes ver su perfil haciendo clic en el siguiente enlace:\n
-            {request.build_absolute_uri(f'/perfil/{postulante.id}')}\n\n
+            {request.build_absolute_uri(f'/usuarios/usuario/{postulante.id}')}\n\n
 
             Gracias por usar JobConnect.
             """
