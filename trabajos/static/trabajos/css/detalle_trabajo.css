@@ -176,37 +176,87 @@
 }
 
 /* Estilos para los botones de postulación y volver */
-.volver-btn, .postular-btn {
+/* Estilos generales */
+.btn {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 12px 30px;  /* Ajuste del padding para hacerlo más largo */
+    border-radius: 5px;
     text-align: center;
-    font-size: 1.1rem;
-    border-radius: 6px;
+    font-weight: bold;
+    color: white;
     text-decoration: none;
-    width: auto;
-    margin-top: 30px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: 600;
+    transition: background-color 0.3s, width 0.3s;  /* Transición suave para el cambio de tamaño */
+    cursor: pointer;
+    font-size: 16px;  /* Tamaño de fuente base */
+    width: auto;  /* Por defecto, el ancho es automático */
+    margin: 0 auto;  /* Centrado horizontal */
 }
 
-.volver-btn {
-    background-color: #007bff;
-    color: white;
-}
-
-.volver-btn:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
+/* Botón para postular */
 .postular-btn {
-    background-color: #28a745;
-    color: white;
+    background-color: #007bff;  /* Azul */
 }
 
 .postular-btn:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
+    background-color: #0056b3;  /* Azul oscuro al pasar el ratón */
+}
+
+/* Estilo para el botón cuando ya se ha postulado */
+.alerta {
+    padding: 10px 20px;
+    background-color: #ffc107;  /* Amarillo para alerta */
+    color: black;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    display: inline-block;
+    animation: fadeOut 5s forwards; /* Desaparece después de 5 segundos */
+}
+
+.alerta span {
+    display: block;
+}
+
+/* Animación para desaparecer */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+}
+
+/* Responsividad */
+
+/* Contenedor del botón */
+.contenedor-boton {
+    display: flex;
+    justify-content: center;  /* Centrado horizontal */
+    align-items: center;      /* Centrado vertical */
+    height: 100vh;            /* Altura completa de la ventana */
+}
+
+/* Pantallas grandes (mayores a 768px) */
+@media (min-width: 769px) {
+    .btn {
+        width: 400px;  /* El botón será más largo en pantallas grandes */
+    }
+}
+
+/* Pantallas medianas (de 576px a 768px) */
+@media (max-width: 768px) and (min-width: 576px) {
+    .btn {
+        width: 350px;  /* El botón sigue siendo largo, pero un poco más pequeño */
+    }
+}
+
+/* Pantallas pequeñas (menores a 576px) */
+@media (max-width: 575px) {
+    .btn {
+        width: 90%;  /* El botón ocupará el 90% del ancho en pantallas muy pequeñas */
+    }
 }
 
 /* Asegura que los botones se alineen correctamente en móviles */
@@ -222,9 +272,6 @@
         margin-bottom: 10px;
     }
 
-    .volver-btn, .postular-btn {
-        width: 100%;
-    }
 
     .trabajo-info {
         grid-template-columns: 1fr;
