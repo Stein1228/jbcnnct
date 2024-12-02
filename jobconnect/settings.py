@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d=c3m++#@fa#cj%fws%m$@qr8g1yc3w*1m)tnyttsf!c3(46uv'  # Clave secreta para el proyecto
 
 # ADVERTENCIA DE SEGURIDAD: no ejecutes con debug activado en producción.
-DEBUG = True  # Cambiar a False en producción
+DEBUG = False  # Cambiar a False en producción
 
 ALLOWED_HOSTS = ['*']  # Hosts que están permitidos para servir esta aplicación, deben especificarse en producción.
 
