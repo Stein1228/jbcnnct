@@ -31,14 +31,14 @@
             <!-- Sidebar - Menú lateral para pantallas pequeñas -->
             <ul class="sidebar">
                 <li onclick="hideSidebar()">
-                    <a href="#"><img src="{% static 'core/images/close_16dp_E8EAED_FILL0_wght400_GRAD0_opsz20.png' %}" height="30" width="30" alt="Cerrar menú"></a>
+                    <a href="{% url 'home' %}"><img src="{% static 'core/images/close_16dp_E8EAED_FILL0_wght400_GRAD0_opsz20.png' %}" height="30" width="30" alt="Cerrar menú"></a>
                 </li>
                 <!-- Enlaces del menú de navegación -->
                 <li><a href="{% url 'home' %}">Inicio</a></li>
                 <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
                 {% if request.user.is_authenticated %}
                     <li><a href="{% url 'trabajos' %}">Trabajos</a></li>
-                    <li><a href="{% url 'lista_usuarios' %}">Usuarios</a></li>
+                    <li><a href="{% url 'lista_usuarios' %}">Expertos</a></li>
                     <li><a href="{% url 'perfil' %}">Perfil</a></li>
                     {% if request.user.is_staff %} 
                     <!-- Este enlace será visible solo para los usuarios que son "staff" -->
@@ -57,7 +57,7 @@
                 <li class="hideOnMobile"><a href="{% url 'nosotros' %}">Nosotros</a></li>
                 {% if request.user.is_authenticated %}
                     <li class="hideOnMobile"><a href="{% url 'trabajos' %}">Trabajos</a></li>
-                    <li class="hideOnMobile"><a href="{% url 'lista_usuarios' %}">Usuarios</a></li>
+                    <li class="hideOnMobile"><a href="{% url 'lista_usuarios' %}">Expertos</a></li>
                     <li class="hideOnMobile"><a href="{% url 'perfil' %}">Perfil</a></li>
                     {% if request.user.is_staff %} 
                     <!-- Este enlace será visible solo para los usuarios que son "staff" -->
